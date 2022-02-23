@@ -4,7 +4,9 @@ import React from 'react';
 // usaAppContext stores - App.js - variables for the entire application
 import { useAppContext } from "../libs/contextLib";
 // Video------------------------------------------------
-import backgroundVideo from '../ppecwalk.mp4';
+import backgroundMP4 from '../ppecwalk.mp4';
+import backgroundWEBM from '../ppecwalk.webm';
+import backgroundMOV from '../ppecwalk.mov';
 import promoteVideo from '../promote.mp4';
 //------------------------------------------------------ \\
 // This file is exported to ---> src/Routes.js
@@ -18,9 +20,9 @@ export default function Home() {
         <main className="container-fluid" >
             {/* Background Video */}
             <video id="background-video" loop autoPlay style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
-                <source src={backgroundVideo} type="video/mp4" />
-                <source src={backgroundVideo} type="video/mov" />
-                <source src={backgroundVideo} type="video/ogg" />
+                <source src={backgroundMP4} type="video/mp4" />
+                <source src={backgroundMOV} type="video/mov" />
+                <source src={backgroundWEBM} type="video/webm" />
                 Your browser does not support the video tag.
             </video>
 
