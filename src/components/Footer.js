@@ -33,20 +33,19 @@ export default function Footer() {
                         link="https://twitter.com/Paid_PerClick"
                     />
 
-                    {/* Discord Page */}
-                    <Link
-                        title=""
-                        extendCSSClass="btn-danger me-3 mb-3"
-                        link="#discord"
-                        icon="fa fa-discord"
-                    />
-
                     {/* GitHub Page */}
                     <Link
                         title=""
                         extendCSSClass="btn-dark me-3 mb-3"
                         icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
+                    />
+
+                    {/* Discord Page */}
+                    <Link
+                        title="Discord"
+                        extendCSSClass="btn-danger me-3 mb-3"
+                        link="#discord"
                     />
 
                     {/* Discord Page */}

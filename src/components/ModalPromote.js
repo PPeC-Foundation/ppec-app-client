@@ -154,11 +154,10 @@ export default function ModalPomote() {
                                 className={`btn mb-3 mb-lg-0 border border-dark btn-dark text-warning`}
                             >
                                 {/* icon */}
-                                <i className="far fa-file-alt"></i>
+                                <i className="fa fa-file-text"></i>
 
                                 {/* name */}
                                 <strong> Promote </strong>
-                                <i className="fas fa-external-link-alt"></i>
                             </a>
 
                             {/* Disabled Link */}
@@ -180,7 +179,7 @@ export default function ModalPomote() {
                         {/* Image failure Alert */}
                         <div className="alert alert-danger border border-danger">                            
                             <small>
-                                <i className="fas fa-exclamation-triangle"></i>
+                                <i className="fa fa-exclamation-triangle"></i>
                                 <strong> Do not refresh the page while your request is processing. </strong>
                             </small>
                         </div>
@@ -194,7 +193,7 @@ export default function ModalPomote() {
                              * -------------------------------------------------------------------------------------->
                              * */}
                             <span className={`d-block p-5 border mb-3 rounded ${image === null ? "d-flex justify-content-center" : "d-none"}`}>
-                                <i className="far fa-image" style={{ fontSize: "3rem" }}></i>
+                                <i className="fa fa-image" style={{ fontSize: "3rem" }}></i>
                             </span>
 
                             {/* 
