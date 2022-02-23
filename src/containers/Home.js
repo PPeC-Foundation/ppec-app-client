@@ -120,18 +120,18 @@ export default function Home() {
                         <p> with the world's first Decentralized Advertisement <i>(DAdvers)</i> platform </p>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
+                <div className="col-12 col-md-7 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
-                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the <strong> connect </strong> button in the top right corner.</p>
+                        <p>Once you've set up your MetaMask wallet with Avalanche Network, connect it by clicking the <strong> connect </strong> button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
                         </a>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
+                <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
@@ -164,7 +164,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
+                <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
