@@ -33,7 +33,7 @@ export default function Ads() {
         async function onLoad() {
             try {
                 // Check that we have not unmounted
-                if (!unmounted) {
+                if (!unmounted && contractSmACCor != null) {
                     // Contract Information
                     let SmACCor = await contractSmACCor.contractInfo();
                     // Get the ad count for the for loop

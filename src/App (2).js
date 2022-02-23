@@ -38,10 +38,6 @@ export default function App() {
     const [adCount, setAdCount] = useState(0);
     const [balance, setBalance] = useState(0);
     const [chainId, setChainId] = useState(0);
-    const [provider, setProvider] = useState(null);
-    const [signer, setSigner] = useState(null);
-    const [contractPPeC, setContractPPeC] = useState(null);
-    const [contractSmACCor, setContractSmACCor] = useState(null);
 // ----------------------------------------------------------------------
     // Important Links
 // ----------------------------------------------------------------------
@@ -58,8 +54,28 @@ export default function App() {
     // what MetaMask injects as window.ethereum into each page.
 // ----------------------------------------------------------------------
     // `signer` is the contract owner. Used to send and sign transactions.
-    //const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
-    //const signer = provider.getSigner(); //Test
+    //const network = "homestead";
+    //const provider = ethers.getDefaultProvider(network, {
+    //    "etherscan": process.env.REACT_APP_ETHERSCANKEY,
+    //    //infura: YOUR_INFURA_PROJECT_ID,
+    //    // Or if using a project secret:
+    //     "infura": {
+    //       "projectId": process.env.REACT_APP_INFURA_PROJECTID,
+    //       "projectSecret": process.env.REACT_APP_INFURA_PROJECTSECRET,
+    //     },
+    //    "alchemy": process.env.REACT_APP_POCKET_ALCHEMYKEY,
+    //    //pocket: YOUR_POCKET_APPLICATION_KEY
+    //    // Or if using an application secret key:
+    //     "pocket": {
+    //       "applicationId": process.env.REACT_APP_POCKET_APPLICATIONID ,
+    //       "applicationSecretKey": process.env.REACT_APP_POCKET_APPLICATIONSECRETKEY
+    //     }
+    //});
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
+    const signer = provider.getSigner(); //Test
+    //const signer = "";
+    //console.log(provider)
     
 // ----------------------------------------------------------------------
     // Contract addresses and definitions
@@ -74,8 +90,8 @@ export default function App() {
     // contractPPeC : Paid Per Click [ERC20] Token contract
     // contractSmACCor : Smart Ads Contract Creator contract
 // ----------------------------------------------------------------------
-    //const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
-    //const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
+    const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
+    const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
 
 // ----------------------------------------------------------------------
     // Reload application when the user changes the network
@@ -179,35 +195,21 @@ export default function App() {
         async function onLoad() {
             try { 
 
-                //const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
-                const provider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc"); // Live
-                const signer = provider.getSigner(); //Test
-                const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
-                const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
-
-                setProvider(provider);
-                setSigner(signer);
-                setContractPPeC(contractPPeC);
-                setContractSmACCor(contractSmACCor);
-
-                if (contractSmACCor != null) {
-                    //Contract Information                
-                    let SmACCor = await contractSmACCor.contractInfo();
-                    let treasuryBalance = ethers.utils.formatUnits(SmACCor[0], 18);
-                    let minBalance = ethers.utils.formatUnits(SmACCor[2], 18);
-                    let promoterFee = SmACCor[3].toNumber();
-                    let claimerFee = SmACCor[4].toNumber();
-                    let minReward = ethers.utils.formatUnits(SmACCor[5], 18);
-                    let adCount = SmACCor[1].toNumber();
-                    //Setter for Contract
-                    setTreasuryBalance(treasuryBalance);
-                    setPromoterFee(promoterFee);
-                    setMinBalance(minBalance);
-                    setClaimerFee(claimerFee);
-                    setMinReward(minReward);
-                    setAdCount(adCount);
-                }
-
+                // Contract Information                
+                let SmACCor = await contractSmACCor.contractInfo();
+                let treasuryBalance = ethers.utils.formatUnits(SmACCor[0], 18);
+                let minBalance = ethers.utils.formatUnits(SmACCor[2], 18);
+                let promoterFee = SmACCor[3].toNumber();
+                let claimerFee = SmACCor[4].toNumber();
+                let minReward = ethers.utils.formatUnits(SmACCor[5], 18);
+                let adCount = SmACCor[1].toNumber();
+                // Setter for Contract
+                setTreasuryBalance(treasuryBalance);
+                setPromoterFee(promoterFee);
+                setMinBalance(minBalance);
+                setClaimerFee(claimerFee);
+                setMinReward(minReward);
+                setAdCount(adCount);
 
             } catch (e) {
                 // Error Handling

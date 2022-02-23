@@ -37,7 +37,7 @@ export default function MyAds() {
 
             try {
                 // Check that we have not unmounted and default account is not null
-                if (!unmounted && defaultAccount != null && chainId === providerId) { 
+                if (!unmounted && contractSmACCor != null && defaultAccount != null && chainId === providerId) { 
                     // Get the ad count for the for loop
                     const adCount = await contractSmACCor.promoterAdCount(defaultAccount);
                     // Create a new array
