@@ -29,7 +29,7 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row m-0">
-                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ height: "calc(100vh - 58px)"}}>
+                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ height: "calc(100vh - 80px)"}}>
                     <div className="text-dark rounded align-self-center">
                         <h1 style={{ fontSize: "3rem", fontFamily: "'Russo One', sans-serif" }}> Decentralizing Advertisement with a <strong className=""> SmAC </strong> </h1>
                         <p className="text-primary" style={{ fontSize: "1.2rem" }}>
@@ -43,7 +43,6 @@ export default function Home() {
                                 > 
                                     <span> Smart Ads </span>
                                 </a>
-                                <span title="DAdvers: Decentralized Advertisement"> on DAdvers </span>
                             </strong>
                         </p>
                         <div className="btn-group">
