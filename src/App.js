@@ -63,32 +63,50 @@ export default function App() {
     const addressSmACCor = process.env.REACT_APP_SMACCOR_ADDRESS;
 
 // ----------------------------------------------------------------------
-    // Reload application when the user changes the network
-    // Handle chain (network) and chainChanged (per EIP-1193)
+    // Detecting if the use has MetaMask
 // ----------------------------------------------------------------------
+    // Return elements if MetaMask is installed
     if (typeof window.ethereum !== 'undefined') {
-        //console.log('MetaMask is installed!');
+
+        // --------------------------------------------------------------
+        // Listen to the chain changes event
+        // --------------------------------------------------------------
         ethereum.on("chainChanged", (chainId) => window.location.reload());
 
+        // --------------------------------------------------------------
         // Get the new chaid id
+        // --------------------------------------------------------------
         ethereum
-            .request({ method: "eth_chainId" })
-            .then((chainId) => { setChainId(parseInt(chainId, 16)); })
-            .catch((err) => { console.error(`Error fetching chainId: ${err.code}: ${err.message}`); });
+            .request({
+                method: "eth_chainId"
+            })
+            .then((chainId) => {
+                setChainId(parseInt(chainId, 16)); // Return the chain id as a number
+            })
+            .catch((err) => {
+                console.error(`Error fetching chainId: ${err.code}: ${err.message}`);
+            });
 
-        // ----------------------------------------------------------------------
-            // Reload the application when the user changes the account
-        // ----------------------------------------------------------------------
-        //Request an ethereum account
+        // --------------------------------------------------------------
+        // //Request an ethereum account
+        // --------------------------------------------------------------        
         ethereum
-            .request({ method: "eth_requestAccounts" })
+            .request({
+                method: "eth_requestAccounts"
+            })
             .then(handleAccountsChanged)
-            .catch((err) => { console.error(err); });
+            .catch((err) => {
+                console.error(err);
+            });
 
+        // --------------------------------------------------------------        
         // Listen to account changes
+        // --------------------------------------------------------------        
         ethereum.on("accountsChanged", handleAccountsChanged);
 
-    } else {
+    }
+    // Return elements if MetaMask is not installed
+    else {
         console.log('MetaMask is not installed!');
     }
     
