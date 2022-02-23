@@ -136,7 +136,7 @@ function Link(props) {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`btn btn-outline-light shadow-sm ${extendCSSClass} `}
+            className={`btn btn-outline-light ${extendCSSClass} `}
         >
             {/* Icon */}
             <i className={`${icon} mr-2`}></i>
