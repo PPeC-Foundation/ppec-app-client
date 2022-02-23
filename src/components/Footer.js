@@ -27,15 +27,15 @@ export default function Footer() {
                     <p> <b> Social Media and Links </b> </p>
                     {/* Twitter Page */}
                     <Link
-                        title=""
-                        extendCSSClass="btn-primary me-3 mb-2"
+                        title="Twitter"
+                        extendCSSClass="btn-dark me-3 mb-2"
                         icon="fa fa-twitter"
                         link="https://twitter.com/Paid_PerClick"
                     />
 
                     {/* GitHub Page */}
                     <Link
-                        title=""
+                        title="GitHub"
                         extendCSSClass="btn-dark me-3 mb-2"
                         icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
@@ -44,7 +44,7 @@ export default function Footer() {
                     {/* Discord Page */}
                     <Link
                         title="Discord"
-                        extendCSSClass="btn-danger me-3 mb-2"
+                        extendCSSClass="btn-dark me-3 mb-2"
                         link="#discord"
                     />
 
