@@ -116,12 +116,13 @@ export default function Home() {
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#f8fcfdf2" }}>
                 <div className="col-12 d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center">
-                        <h1 style={{ fontSize: "2.5rem" }}> <b> Launch your Smart Ad </b> </h1>
+                        <h1 style={{ fontSize: "2.5rem" }}> <b> Launching your SmAC </b> </h1>
                     </div>
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center text-center">
-                        <h2 style={{ fontSize: "1.7rem" }}> Setup your MetaMask wallet </h2>
+                        <span style={{ fontSize: "4rem" }}> &#10102; </span>
+                        <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
@@ -131,21 +132,23 @@ export default function Home() {
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }}> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
-                            <b> Learn|More </b>
+                            <b> Get|PPeC </b>
                         </a>
                     </div>
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }}> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
-                            <b> Learn|More </b>
+                            <b> Promote </b>
                         </a>
                     </div>
                 </div>
