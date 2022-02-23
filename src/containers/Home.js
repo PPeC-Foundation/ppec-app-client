@@ -85,9 +85,9 @@ export default function Home() {
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#ffffffeb" }}>
                 <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
-                    <div className="p-3 border rounded align-self-center">
+                    <div className="p-5 border rounded align-self-center">
                         {/* Background Video */}
-                        <video id="promote-video" loop autoPlay className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
+                        <video id="promote-video" loop playsinline autoPlay className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
                             <source src={promoteVideo} type="video/mp4" />
                             <source src={promoteVideo} type="video/ogg" />
                             Your browser does not support the video tag.
