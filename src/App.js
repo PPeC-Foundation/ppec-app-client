@@ -40,6 +40,7 @@ export default function App() {
     const [chainId, setChainId] = useState(0);
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
+    const [needMetaMask, setNeedMetaMask] = useState(false);
     const [contractPPeC, setContractPPeC] = useState(null);
     const [contractSmACCor, setContractSmACCor] = useState(null);
 // ----------------------------------------------------------------------
@@ -108,8 +109,8 @@ export default function App() {
     // Return elements if MetaMask is not installed
     else {
         console.log('MetaMask is not installed!');
+        //setNeedMetaMask(true);
     }
-    console.log(window.innerWidth)
     
 // ----------------------------------------------------------------------
     // Reload the application when the user changes the account
@@ -177,6 +178,33 @@ export default function App() {
     // Our clean up happens when we leave the page
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultAccount]);
+
+// ----------------------------------------------------------------------
+    // Check MetaMask connection
+// ----------------------------------------------------------------------
+    useEffect(() => {
+        // Get contract information on load
+        async function onLoad() {
+            try { 
+
+                if (typeof window.ethereum !== 'undefined') {
+                    setNeedMetaMask(false);
+                }
+                else {
+                    setNeedMetaMask(true);
+                }
+            } catch (e) {
+                // Error Handling
+                alert(e);
+            }
+        }
+
+        // Returning function when the screen finish loading
+        onLoad();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
 // ----------------------------------------------------------------------
     // Get Contract information
@@ -267,6 +295,7 @@ export default function App() {
                 buyPPeCLink,
                 contractPPeC,
                 documentPPeC,
+                needMetaMask,
                 chartPPeCLink,
                 defaultAccount,
                 treasuryBalance,
@@ -291,7 +320,7 @@ export default function App() {
             {/* Footer Component */}
             <Footer />
 
-            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} />
+            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} />
 
         </AppContext.Provider>
   );
@@ -299,7 +328,7 @@ export default function App() {
 
 function Errors(props) {
     // Important variables
-    const { alertMetaMask, providerId, chainId } = props;
+    const { alertMetaMask, providerId, chainId, needMetaMask } = props;
 
     // Return UI
     return (
@@ -308,6 +337,11 @@ function Errors(props) {
             <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${alertMetaMask === "" ? "d-none" : ""}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
                 <strong> {alertMetaMask} </strong>
+            </div>
+
+            <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${needMetaMask === false ? "d-none" : ""}`}>
+                <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
+                <strong> Please install MetaMask to use the app. </strong>
             </div>
 
             <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${chainId === providerId ? "d-none" : ""}`}>
