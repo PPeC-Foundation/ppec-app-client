@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <main className="container-fluid" >
             {/* Background Video */}
-            <video id="background-video" loop autoPlay style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
+            <video id="background-video" loop playsinline autoPlay style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
                 <source src={backgroundMP4} type="video/mp4" />
                 <source src={backgroundMOV} type="video/mov" />
                 <source src={backgroundWEBM} type="video/webm" />
