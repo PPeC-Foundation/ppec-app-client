@@ -5,7 +5,6 @@ import React from 'react';
 import { useAppContext } from "../libs/contextLib";
 // Video------------------------------------------------
 import backgroundMP4 from '../ppecwalk.mp4';
-import backgroundWEBM from '../ppecwalk.webm';
 import backgroundMOV from '../ppecwalk.mov';
 import promoteVideo from '../promote.mp4';
 //------------------------------------------------------ \\
@@ -23,7 +22,6 @@ export default function Home() {
             <video id="background-video" playsInline autoPlay loop muted style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
                 <source src={backgroundMP4} type="video/mp4" />
                 <source src={backgroundMOV} type="video/mov" />
-                <source src={backgroundWEBM} type="video/webm" />
                 Your browser does not support the video tag.
             </video>
 
@@ -111,6 +109,47 @@ export default function Home() {
                         </video>
                     </div>
                 </div>
+            </div>
+
+
+            {/* Jumbotron */}
+            <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#f8fcfdf2" }}>
+                <div className="col-12 d-flex justify-content-center align-content-center my-5 my-md-0">
+                    <div className="p-3 align-self-center">
+                        <h1 style={{ fontSize: "2.5rem" }}> <b> Launch your Smart Ad </b> </h1>
+                    </div>
+                </div>
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <h2 style={{ fontSize: "1.7rem" }}> Setup your MetaMask wallet </h2>
+                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
+                            <i className='fa fa-file-text'></i>
+                            <b> Learn|More </b>
+                        </a>
+                    </div>
+                </div>
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
+                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
+                            <i className='fa fa-file-text'></i>
+                            <b> Learn|More </b>
+                        </a>
+                    </div>
+                </div>
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
+                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
+                            <i className='fa fa-file-text'></i>
+                            <b> Learn|More </b>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
             
         </main>
