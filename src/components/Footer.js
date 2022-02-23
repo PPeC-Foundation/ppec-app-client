@@ -28,32 +28,32 @@ export default function Footer() {
                     {/* Twitter Page */}
                     <Link
                         title="Twitter"
-                        extendCSSClass="btn-dark me-3 mb-2"
+                        extendCSSClass="btn-dark me-2 mb-2"
                         icon="fa fa-twitter"
                         link="https://twitter.com/Paid_PerClick"
-                    />
-
-                    {/* GitHub Page */}
-                    <Link
-                        title="GitHub"
-                        extendCSSClass="btn-dark me-3 mb-2"
-                        icon="fa fa-github"
-                        link="https://github.com/PPeC-Foundation"
                     />
 
                     {/* Discord Page */}
                     <Link
                         title="Discord"
-                        extendCSSClass="btn-dark me-3 mb-2"
+                        extendCSSClass="btn-dark me-2 mb-2"
                         link="#discord"
                     />
 
                     {/* Discord Page */}
                     <Link
                         title="Chart"
-                        extendCSSClass="btn-success me-3 mb-2"
+                        extendCSSClass="btn-success me-2 mb-2"
                         link={chartPPeCLink}
                         icon="fa fa-line-chart"
+                    />
+
+                    {/* GitHub Page */}
+                    <Link
+                        title="GitHub"
+                        extendCSSClass="btn-dark mb-2"
+                        icon="fa fa-github"
+                        link="https://github.com/PPeC-Foundation"
                     />
                 </div>
 
