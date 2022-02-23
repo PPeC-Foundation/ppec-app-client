@@ -54,7 +54,7 @@ export default function Footer() {
                         title="Chart"
                         extendCSSClass="btn-success me-3 mb-3"
                         link={chartPPeCLink}
-                        icon="fa fa-chart-line"
+                        icon="fa fa-line-chart"
                     />
                 </div>
 

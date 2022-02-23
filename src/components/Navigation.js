@@ -76,8 +76,8 @@ function NavBar(props) {
                         {/* Links */}
                         <NavLink link="/ads" path={path} name={`SmAC`} icon="fa fa-bullhorn" targetId="ads" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/claim"/>
                         <NavLink link="/myads" path={path} name="U|SmAC" icon="fa fa-sitemap" targetId="myads" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/promote"/>
-                        <NavLink link="/digest" path={path} name="Digest" icon="fa fa-rocket" targetId="digest" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-digest-smac-cycle"/>
-                        <NavLink link="/bounty" path={path} name="Bounty" icon="fa fa-coins" targetId="bounty" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-bounty-smac-cycle" />
+                        <NavLink link="/digest" path={path} name="Digest" icon="fa fa-cube" targetId="digest" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-digest-smac-cycle"/>
+                        <NavLink link="/bounty" path={path} name="Bounty" icon="fa fa-heartbeat" targetId="bounty" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-bounty-smac-cycle" />
                         <NavLink link={buyPPeCLink} target="newWindow" path={path} name="Get|PPeC" icon="fa fa-bitcoin" targetId="buy" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec" />
                         <NavLink link="#cycle" path={path} name="15|Days" icon="fa fa-history" targetId="cycle" disabled="disabled" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/promote#smac-cycles-states" />
 
@@ -275,9 +275,9 @@ function AdsModalDetail() {
             <h3 className=""> <strong> What's in the SmAC tab? </strong> </h3>
             <p className=""> In the SmAC tab, find all running SmAC and claim rewards. </p>
             <h3 className=""> <strong> Claiming Rewards. </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> You can tag a SmAC as a scam. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Each SmAC can only be claimed once. </p>
-            <p className=""> <i className="fas fa-check-square"></i> You need a minimun amount of tokens to claim rewards. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> You can tag a SmAC as a scam. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Each SmAC can only be claimed once. </p>
+            <p className=""> <i className="fa fa-check-square"></i> You need a minimun amount of tokens to claim rewards. </p>
 
             {/* Minimum PPeC Required, Claim Fee, Total Ad count */}
             <div className="row">
@@ -328,13 +328,13 @@ function MyAdsModalDetail() {
             <h3 className=""> <strong> What's in the U|SmAC tab? </strong> </h3>
             <p className=""> In the U|SmAC tab, you can manage all your SmAC. </p>
             <h3 className=""> <strong> Who can Launch a SmAC? </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square text-success"></i> Anyone, can launch a SmAC.  </p>
+            <p className="mb-0"> <i className="fa fa-check-square text-success"></i> Anyone, can launch a SmAC.  </p>
             <h3 className=""> <strong> Launch a SmAC </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Each SmAC runs/cycles for 15 days. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> After 15 days, leftover $PPeC can be claimed back.  </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> You need a minimun amount of $PPeC to launch SmAC. </p>
-            <p className="mb-0"> <i className="fas fa-check-square text-danger"></i> Once launched, a SmAC <b className="text-danger"> CANNOT </b> be edited nor deleted. </p>
-            <p className=""> <i className="fas fa-check-square text-warning"></i> After 19 days, a SmAC becomes a Bounty SmAC if/when it has $PPeC in its coffer.  </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Each SmAC runs/cycles for 15 days. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> After 15 days, leftover $PPeC can be claimed back.  </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> You need a minimun amount of $PPeC to launch SmAC. </p>
+            <p className="mb-0"> <i className="fa fa-check-square text-danger"></i> Once launched, a SmAC <b className="text-danger"> CANNOT </b> be edited nor deleted. </p>
+            <p className=""> <i className="fa fa-check-square text-warning"></i> After 19 days, a SmAC becomes a Bounty SmAC if/when it has $PPeC in its coffer.  </p>
 
             {/* Minimum Reward required, Promoter Fee, U|SmAC */}
             <div className="row">
@@ -383,10 +383,10 @@ function DigestModalDetail() {
             <h3 className=""> <strong> What's in the Digest tab? </strong> </h3>
             <p className=""> You will find all SmAC waiting for $PPeC in their coffers to run. </p>
             <h3 className=""> <strong> Digest SmAC. </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> A preview of the SmAC link or URL.  </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> A preview of the SmAC contract address. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> A preview of the SmAC minimum reward. </p>
-            <p className=""> <i className="fas fa-check-square"></i> A preview of the SmAC promoter's address. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> A preview of the SmAC link or URL.  </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> A preview of the SmAC contract address. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> A preview of the SmAC minimum reward. </p>
+            <p className=""> <i className="fa fa-check-square"></i> A preview of the SmAC promoter's address. </p>
 
             {/* Digest SmAC */}
             <div className="row d-none">
@@ -419,9 +419,9 @@ function BountyModalDetail() {
             <h3 className=""> <strong> What's in the Bounty tab? </strong> </h3>
             <p className=""> You will find all expired SmAC with $PPeC in their coffers. Once a SmAC becomes a Bounty SmAC, you can claim all $PPeC in its coffer. </p>
             <h3 className=""> <strong> Bounty SmAC </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> After 19 days, a SmAC will become <b>Bounty SmAC</b>. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> For Bounty SmAC, the reward is the entire $PPeC coffer. </p>
-            <p className=""> <i className="fas fa-check-square"></i> You need a minimun amount of $PPeC to claim rewards. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> After 19 days, a SmAC will become <b>Bounty SmAC</b>. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> For Bounty SmAC, the reward is the entire $PPeC coffer. </p>
+            <p className=""> <i className="fa fa-check-square"></i> You need a minimun amount of $PPeC to claim rewards. </p>
 
             {/* Bounty SmAC */}
             <div className="row d-none">
@@ -503,10 +503,10 @@ function BuyModalDetail() {
             </h3>
             <p className=""> It is the second phase of DAdvers.  </p>
             <h3 className=""> <strong> Why should I buy $PPeC? </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Claim rewards.  </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Hold and/or transfer.   </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Launch smart advertisments.   </p>
-            <p className=""> <i className="fas fa-check-square text-primary"></i> In short, by using $PPeC, you are funding PPeC 2.0. This applies to claimers, promoters, and holders. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Claim rewards.  </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Hold and/or transfer.   </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Launch smart advertisments.   </p>
+            <p className=""> <i className="fa fa-check-square text-primary"></i> In short, by using $PPeC, you are funding PPeC 2.0. This applies to claimers, promoters, and holders. </p>
             <h4> <strong> Join the SmAC and PPeC community </strong> </h4>
 
             {/* Description, Budget amount, Balance amount, Pledged amount */}
@@ -558,10 +558,10 @@ function CycleModalDetail() {
             <h3 className=""> <strong> What's a SmAC cycle? </strong> </h3>
             <p className=""> A cycle is how long an SmAC can run for. </p>
             <h3 className=""> <strong> SmAC cycle </strong> </h3>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> Each SmAC has a 15 day cycle. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> SmAC become Bounty SmAC after 19 days. </p>
-            <p className="mb-0"> <i className="fas fa-check-square"></i> After 15 days, a SmAC coffer can only be claimed by the promoter. </p>
-            <p className=""> <i className="fas fa-check-square"></i> After 19 days, a SmAC coffer can be claimed by anyone with the required minimum PPeC balance. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> Each SmAC has a 15 day cycle. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> SmAC become Bounty SmAC after 19 days. </p>
+            <p className="mb-0"> <i className="fa fa-check-square"></i> After 15 days, a SmAC coffer can only be claimed by the promoter. </p>
+            <p className=""> <i className="fa fa-check-square"></i> After 19 days, a SmAC coffer can be claimed by anyone with the required minimum PPeC balance. </p>
 
             {/* Description, Budget amount, Balance amount, Pledged amount */}
             <div className="row d-none">

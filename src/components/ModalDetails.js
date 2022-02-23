@@ -41,11 +41,10 @@ export default function ModalDetails(props) {
                                 className={`btn mb-3 mb-lg-0 border border-dark btn-dark text-warning`}
                             >
                                 {/* icon */}
-                                <i className="far fa-file-alt"></i>
+                                <i className="fa fa-file-text"></i>
 
                                 {/* name */}
                                 <strong> Docs </strong>
-                                <i className="fas fa-external-link-alt"></i>
                             </a>
 
                             {/* Link */}

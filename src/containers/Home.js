@@ -97,13 +97,13 @@ export default function Home() {
                         <h1 style={{ fontSize: "2.5rem" }}> <b>SmAC</b> </h1>
                         <p style={{ fontSize: "1.2rem" }}> Incentive-driven solutions to help your business or project grow at the blockchain speed. Launch your smart ads in <span className="border-bottom">seconds</span>. </p>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item "> <i className="fas fa-check-circle text-success"></i> <b> No Fees </b> </li>
-                            <li className="list-group-item "> <i className="fas fa-check-circle text-success"></i> <b> No waiting for approval </b> </li>
-                            <li className="list-group-item "> <i className="fas fa-check-circle text-success"></i> <b> No credential needed </b> </li>
-                            <li className="list-group-item "> <i className="fas fa-check-circle text-success"></i> <b> On standby audience </b> </li>
+                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No Fees </b> </li>
+                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No waiting for approval </b> </li>
+                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No credential needed </b> </li>
+                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> On standby audience </b> </li>
                         </ul>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
-                            <i className='fas fa-file-alt'></i>
+                            <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
                         </a>
                     </div>
