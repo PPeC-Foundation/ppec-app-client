@@ -117,7 +117,7 @@ export default function Home() {
                 <div className="col-12 d-flex justify-content-center align-content-center my-3 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b> Launching your SmAC </b> </h1>
-                        <p> with the world's first Decentralized Advertisement <i>(DAdvers)</i> platform </p>
+                        <p> with the world's first Decentralized Advertisements <i>(DAdvers)</i> platform </p>
                     </div>
                 </div>
                 <div className="col-12 col-md-7 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">

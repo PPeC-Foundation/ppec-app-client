@@ -116,7 +116,7 @@ export default function Modal(props) {
                         {notFundedRunning
                             ? <div className="alert alert-danger border border-danger">
                                 <small>
-                                    <i className="fas fa-exclamation-triangle"></i>
+                                    <i className="fa fa-exclamation-triangle"></i>
                                     <strong> Do not send multiple funding requests for a single SmAC. </strong>
                                 </small>
                             </div>

@@ -27,10 +27,18 @@ img {
 /* small screen */
 @media screen and (max-width:768px) {
 
-    #Card img {
+    /* small screen 2 images */
+    /*#Card img {
         height: 30vw;
         min-height: 30vw;
         max-height: 30vw;
+        object-fit: cover;
+    }*/
+    /* small screen 1 image1 */
+    #Card img {
+        height: auto;
+        min-height: auto;
+        max-height: auto;
         object-fit: cover;
     }
 

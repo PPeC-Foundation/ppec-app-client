@@ -143,9 +143,9 @@ function InfoBar(props) {
             <div className="col-12 col-lg-8">
                 <div className="row">
                     <ListItem title="Total SmAC" value={adCount} />
-                    <ListItem title="Treasury Balance" value={commify(treasuryBalance) + " PPeC"} />
-                    <ListItem title="Min. Reward" value={commify(minReward) + " PPeC "} />
-                    <ListItem title="Min. Balance" value={commify(minBalance) + " PPeC "} />
+                    <ListItem title="Treasury Balance" value={commify(treasuryBalance) } />
+                    <ListItem title="Min. Reward" value={commify(minReward) } />
+                    <ListItem title="Min. Balance" value={commify(minBalance) } />
                 </div>
             </div>
 
@@ -157,7 +157,7 @@ function InfoBar(props) {
                         <div className="list-group">
                             {/* value */}
                             <div className="list-group-item border-primary py-1">
-                                <span className="" > <b> {commify(balance)} PPeC </b> </span>
+                                <span className="" > <b> {commify(balance)} </b> </span>
                             </div>
 
                             {/* button */}
@@ -180,7 +180,7 @@ function InfoBar(props) {
                         <div className="list-group h-100">
                             {/* value */}
                             <div className="list-group-item py-1 h-100">
-                                <span className="" > <b> {commify(pledged)} PPeC </b> </span>
+                                <span className="" > <b> {commify(pledged)} </b> </span>
                             </div>
 
                             {/* title */}
