@@ -47,6 +47,9 @@ export default function App() {
     // Important Links
 // ----------------------------------------------------------------------
     const documentPPeC = "https://paidperclick.gitbook.io/ppec-docs/";
+    const claimPPeC = "https://paidperclick.gitbook.io/ppec-docs/guides/claim";
+    const promotePPeC = "https://paidperclick.gitbook.io/ppec-docs/guides/promote";
+    const getPPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec";
     const howToGetPPeCLink = "https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec";
     const smartContractPPeC = "https://snowtrace.io/address/0xe1498556390645ca488320fe979bc72bdecb6a57"; // PPeC Full contract snowtrace
     const smaccorSnowTraceLink = "https://snowtrace.io/address/0xc3121c3689b738f025e0a7963105b08b9ee9a16d#code"; // SmACCor Full contract snowtrace
@@ -290,10 +293,13 @@ export default function App() {
                 provider,
                 minReward,
                 connected,
+                claimPPeC,
                 minBalance,
                 claimerFee,
                 promoterFee,
+                promotePPeC,
                 buyPPeCLink,
+                getPPeCDocs,
                 contractPPeC,
                 documentPPeC,
                 needMetaMask,
@@ -321,7 +327,7 @@ export default function App() {
             {/* Footer Component */}
             <Footer />
 
-            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} />
+            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} buyPPeCLink={buyPPeCLink}/>
 
         </AppContext.Provider>
   );
@@ -329,7 +335,7 @@ export default function App() {
 
 function Errors(props) {
     // Important variables
-    const { alertMetaMask, providerId, chainId, needMetaMask } = props;
+    const { alertMetaMask, providerId, chainId, needMetaMask, buyPPeCLink } = props;
 
     // Return UI
     return (
@@ -349,7 +355,7 @@ function Errors(props) {
                     className="btn btn-danger border border-dark shadow-sm"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec"
+                    href={buyPPeCLink}
                 >
                     <i className="fa fa-file-text"></i>
                     <strong> Learn more </strong>

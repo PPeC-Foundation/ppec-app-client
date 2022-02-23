@@ -15,7 +15,7 @@ import promoteVideo from '../promote.mp4';
 
 export default function Home() {
     // Important variables
-    const { documentPPeC, buyPPeCLink } = useAppContext();
+    const { documentPPeC, buyPPeCLink, promotePPeC, getPPeCDocs } = useAppContext();
     return (
         <main className="container-fluid" >
             {/* Background Video */}
@@ -124,7 +124,7 @@ export default function Home() {
                         <span style={{ fontSize: "4rem" }}> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
-                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
+                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
                         </a>
@@ -135,10 +135,31 @@ export default function Home() {
                         <span style={{ fontSize: "4rem" }}> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
-                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
-                            <i className='fa fa-file-text'></i>
-                            <b> Get|PPeC </b>
-                        </a>
+                        {/* Button Group */}
+                        <div className="btn-group">
+                            {/* Modal Button */}
+                            <a
+                                target="_blank"
+                                href={getPPeCDocs}
+                                rel="noopener noreferrer"
+                                className="btn btn-dark text-warning border border-end-0 border-dark"
+                            >
+                                {/* icon */}
+                                <i className="fa fa-file-text"></i>
+                                <strong> View Docs </strong>
+                            </a>
+
+                            {/* Link */}
+                            <a
+                                target="_blank"
+                                href={buyPPeCLink}
+                                rel="noopener noreferrer"
+                                className="btn btn-primary border border-dark shadow-sm"
+                            >
+                                {/* name */}
+                                <strong> Get|PPeC </strong>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
@@ -146,10 +167,31 @@ export default function Home() {
                         <span style={{ fontSize: "4rem" }}> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
                         <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
-                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
-                            <i className='fa fa-file-text'></i>
-                            <b> Promote </b>
-                        </a>
+                        {/* Button Group */}
+                        <div className="btn-group">
+                            {/* Modal Button */}
+                            <a
+                                target="_blank"
+                                href={promotePPeC}
+                                rel="noopener noreferrer"
+                                className="btn btn-dark text-warning border border-end-0 border-dark"
+                            >
+                                {/* icon */}
+                                <i className="fa fa-file-text"></i>
+                                <strong> View Docs </strong>
+                            </a>
+
+                            {/* Link */}
+                            <a
+                                target="_blank"
+                                href={buyPPeCLink}
+                                rel="noopener noreferrer"
+                                className="btn btn-primary border border-dark shadow-sm"
+                            >
+                                {/* name */}
+                                <strong> Promote|SmAC </strong>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
