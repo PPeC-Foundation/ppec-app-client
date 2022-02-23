@@ -47,8 +47,8 @@ export default function App() {
     // Important Links
 // ----------------------------------------------------------------------
     const documentPPeC = "https://paidperclick.gitbook.io/ppec-docs/";
-    const claimPPeC = "https://paidperclick.gitbook.io/ppec-docs/guides/claim";
-    const promotePPeC = "https://paidperclick.gitbook.io/ppec-docs/guides/promote";
+    const claimPPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/claim";
+    const promotePPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/promote";
     const getPPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec";
     const howToGetPPeCLink = "https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec";
     const smartContractPPeC = "https://snowtrace.io/address/0xe1498556390645ca488320fe979bc72bdecb6a57"; // PPeC Full contract snowtrace
@@ -293,11 +293,11 @@ export default function App() {
                 provider,
                 minReward,
                 connected,
-                claimPPeC,
+                claimPPeCDocs,
                 minBalance,
                 claimerFee,
                 promoterFee,
-                promotePPeC,
+                promotePPeCDocs,
                 buyPPeCLink,
                 getPPeCDocs,
                 contractPPeC,

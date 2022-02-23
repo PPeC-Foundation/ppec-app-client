@@ -49,7 +49,7 @@ function Navigation() {
 function NavBar(props) {
     // Important variables
     const { path } = props;
-    const { connected, buyPPeCLink, defaultAccount, connectWalletHandler } = useAppContext();
+    const { connected, buyPPeCLink, defaultAccount, connectWalletHandler, claimPPeCDocs, promotePPeCDocs, getPPeCDocs } = useAppContext();
     // We are truncating `defaultAccount` address. Get the first 5 and the last 3 digits
     const first5Digits = (defaultAccount === null ? "xxx" : defaultAccount.substr(0, 5));
     const last3Digits = (defaultAccount === null ? "xxx" : defaultAccount.substr(39));
@@ -74,11 +74,11 @@ function NavBar(props) {
                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                     <div className="row my-3 my-md-0 w-100 mx-0">
                         {/* Links */}
-                        <NavLink link="/ads" path={path} name={`SmAC`} icon="fa fa-bullhorn" targetId="ads" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/claim"/>
-                        <NavLink link="/myads" path={path} name="U|SmAC" icon="fa fa-sitemap" targetId="myads" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/promote"/>
+                        <NavLink link="/ads" path={path} name={`SmAC`} icon="fa fa-bullhorn" targetId="ads" docsLink={claimPPeCDocs}/>
+                        <NavLink link="/myads" path={path} name="U|SmAC" icon="fa fa-sitemap" targetId="myads" docsLink={promotePPeCDocs}/>
                         <NavLink link="/digest" path={path} name="Digest" icon="fa fa-cube" targetId="digest" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-digest-smac-cycle"/>
                         <NavLink link="/bounty" path={path} name="Bounty" icon="fa fa-heartbeat" targetId="bounty" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/smac/what-is-a-smac-cycle#a-bounty-smac-cycle" />
-                        <NavLink link={buyPPeCLink} target="newWindow" path={path} name="Get|PPeC" icon="fa fa-bitcoin" targetId="buy" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec" />
+                        <NavLink link={buyPPeCLink} target="newWindow" path={path} name="Get|PPeC" icon="fa fa-bitcoin" targetId="buy" docsLink={getPPeCDocs} />
                         <NavLink link="#cycle" path={path} name="15|Days" icon="fa fa-history" targetId="cycle" disabled="disabled" docsLink="https://paidperclick.gitbook.io/ppec-docs/guides/promote#smac-cycles-states" />
 
                         {/* Connect Button, Address Button*/}

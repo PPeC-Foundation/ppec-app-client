@@ -15,7 +15,7 @@ import promoteVideo from '../promote.mp4';
 
 export default function Home() {
     // Important variables
-    const { documentPPeC, buyPPeCLink, promotePPeC, getPPeCDocs } = useAppContext();
+    const { documentPPeC, buyPPeCLink, promotePPeCDocs, getPPeCDocs } = useAppContext();
     return (
         <main className="container-fluid" >
             {/* Background Video */}
@@ -123,7 +123,7 @@ export default function Home() {
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
-                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the <strong> connect </strong> button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
@@ -134,7 +134,7 @@ export default function Home() {
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
-                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <p> When you are connected to PaidPerClick click on the <strong> Get|PPeC </strong> button on the navigation bar to swap USDC for $PPeC.</p>
                         {/* Button Group */}
                         <div className="btn-group">
                             {/* Modal Button */}
@@ -157,6 +157,7 @@ export default function Home() {
                                 className="btn btn-primary border border-dark shadow-sm"
                             >
                                 {/* name */}
+                                <i className="fa fa-bitcoin"></i>
                                 <strong> Get|PPeC </strong>
                             </a>
                         </div>
@@ -166,13 +167,13 @@ export default function Home() {
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
-                        <p>Once you've set up your MetaMask wallet, connect it to PaidPerClick by clicking the connect button in the top right corner.</p>
+                        <p> With your wallet fully funded, your are ready to launch your SmAC. Click on the <strong> promote </strong> button to launch a SmAC.</p>
                         {/* Button Group */}
                         <div className="btn-group">
                             {/* Modal Button */}
                             <a
                                 target="_blank"
-                                href={promotePPeC}
+                                href={promotePPeCDocs}
                                 rel="noopener noreferrer"
                                 className="btn btn-dark text-warning border border-end-0 border-dark"
                             >
@@ -182,15 +183,15 @@ export default function Home() {
                             </a>
 
                             {/* Link */}
-                            <a
-                                target="_blank"
-                                href={buyPPeCLink}
-                                rel="noopener noreferrer"
-                                className="btn btn-primary border border-dark shadow-sm"
+                            <button
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#promote"
+                                className="btn btn-primary border border-dark"
                             >
-                                {/* name */}
-                                <strong> Promote|SmAC </strong>
-                            </a>
+                                <i className="fa fa-plus-square"></i>
+                                <b> Promote|SmAC </b>
+                            </button>
                         </div>
                     </div>
                 </div>
