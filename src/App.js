@@ -52,14 +52,6 @@ export default function App() {
     const chartPPeCLink = "https://analytics.traderjoexyz.com/pairs/0x6fa8417e81fbc0c6bc048f99b01b632ade4b98e4";
     const liquidityPoolPPeCLink = "https://traderjoexyz.com/pool/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e/0xe1498556390645ca488320fe979bc72bdecb6a57#/";
     const buyPPeCLink = "https://traderjoexyz.com/trade?inputCurrency=0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e&outputCurrency=0xe1498556390645ca488320fe979bc72bdecb6a57#/";
-
-// ----------------------------------------------------------------------
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page.
-// ----------------------------------------------------------------------
-    // `signer` is the contract owner. Used to send and sign transactions.
-    //const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
-    //const signer = provider.getSigner(); //Test
     
 // ----------------------------------------------------------------------
     // Contract addresses and definitions
@@ -71,42 +63,38 @@ export default function App() {
     const addressSmACCor = process.env.REACT_APP_SMACCOR_ADDRESS;
 
 // ----------------------------------------------------------------------
-    // contractPPeC : Paid Per Click [ERC20] Token contract
-    // contractSmACCor : Smart Ads Contract Creator contract
-// ----------------------------------------------------------------------
-    //const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
-    //const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
-
-// ----------------------------------------------------------------------
     // Reload application when the user changes the network
     // Handle chain (network) and chainChanged (per EIP-1193)
 // ----------------------------------------------------------------------
-    ethereum.on("chainChanged", (chainId) => window.location.reload());
-    //provider.once("error", (message) => { console.log(message) });
+    if (typeof window.ethereum !== 'undefined') {
+        //console.log('MetaMask is installed!');
+        ethereum.on("chainChanged", (chainId) => window.location.reload());
 
-    // Get the new chaid id
-    ethereum
-        .request({ method: "eth_chainId" })
-        .then((chainId) => {
-            setChainId(parseInt(chainId, 16));
-        })
-        .catch((err) => {
-            console.error(`Error fetching chainId: ${err.code}: ${err.message}`);
-        });
+        // Get the new chaid id
+        ethereum
+            .request({ method: "eth_chainId" })
+            .then((chainId) => { setChainId(parseInt(chainId, 16)); })
+            .catch((err) => { console.error(`Error fetching chainId: ${err.code}: ${err.message}`); });
+
+        // ----------------------------------------------------------------------
+            // Reload the application when the user changes the account
+        // ----------------------------------------------------------------------
+        //Request an ethereum account
+        ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then(handleAccountsChanged)
+            .catch((err) => { console.error(err); });
+
+        // Listen to account changes
+        ethereum.on("accountsChanged", handleAccountsChanged);
+
+    } else {
+        console.log('MetaMask is not installed!');
+    }
     
 // ----------------------------------------------------------------------
     // Reload the application when the user changes the account
 // ----------------------------------------------------------------------
-    //Request an ethereum account
-    ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then(handleAccountsChanged)
-        .catch((err) => {
-            console.error(err);
-        });
-
-    // Listen to account changes
-    ethereum.on("accountsChanged", handleAccountsChanged);
 
     // Handle connection to MetaMask
     function handleAccountsChanged(accounts) {
@@ -179,9 +167,18 @@ export default function App() {
         async function onLoad() {
             try { 
 
+                // ----------------------------------------------------------------------
+                // A Web3Provider wraps a standard Web3 provider, which is
+                // what MetaMask injects as window.ethereum into each page.
+                // ----------------------------------------------------------------------
                 //const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
                 const provider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc"); // Live
                 const signer = provider.getSigner(); //Test
+
+                // ----------------------------------------------------------------------
+                // contractPPeC : Paid Per Click [ERC20] Token contract
+                // contractSmACCor : Smart Ads Contract Creator contract
+                // ----------------------------------------------------------------------
                 const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
                 const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
 
@@ -207,8 +204,6 @@ export default function App() {
                     setMinReward(minReward);
                     setAdCount(adCount);
                 }
-
-
             } catch (e) {
                 // Error Handling
                 alert(e);
