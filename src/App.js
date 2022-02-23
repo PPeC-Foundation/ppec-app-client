@@ -187,9 +187,11 @@ export default function App() {
         async function onLoad() {
             try { 
 
+                // Return elements if MetaMask is installed
                 if (typeof window.ethereum !== 'undefined') {
                     setNeedMetaMask(false);
                 }
+                // Return elements if MetaMask is not installed
                 else {
                     setNeedMetaMask(true);
                 }
@@ -204,7 +206,6 @@ export default function App() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
 
 // ----------------------------------------------------------------------
     // Get Contract information
@@ -334,17 +335,28 @@ function Errors(props) {
     return (
         <div className="px-3" style={{ position: "fixed", bottom: "0", right: "0" }}>
 
-            <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${alertMetaMask === "" ? "d-none" : ""}`}>
+            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${alertMetaMask === "" ? "d-none" : ""}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
                 <strong> {alertMetaMask} </strong>
             </div>
 
-            <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${needMetaMask === false ? "d-none" : ""}`}>
+            <div className={`alert alert-danger alert-dismissible fade show text-center shadow border border-dark ${needMetaMask === true ? "" : "d-none"}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
-                <strong> Please install MetaMask to use the app. </strong>
+                {/* Alert text */}
+                <p className=""><strong> Please install MetaMask to use the app. </strong></p>
+                {/* Link */}
+                <a
+                    className="btn btn-danger border border-dark shadow-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://paidperclick.gitbook.io/ppec-docs/guides/how-to-buy-usdppec"
+                >
+                    <i className="fa fa-file-text"></i>
+                    <strong> Learn more </strong>
+                </a>
             </div>
 
-            <div className={`alert alert-danger alert-dismissible fade show shadow border border-dark ${chainId === providerId ? "d-none" : ""}`}>
+            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${chainId != providerId && needMetaMask === false ? "" : "d-none"}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Please connect to Avalanche Network.</strong>
             </div>
