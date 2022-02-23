@@ -109,6 +109,7 @@ export default function App() {
     else {
         console.log('MetaMask is not installed!');
     }
+    console.log(window.innerWidth)
     
 // ----------------------------------------------------------------------
     // Reload the application when the user changes the account
