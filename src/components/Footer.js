@@ -23,7 +23,7 @@ export default function Footer() {
             <div className="row px-3 pt-3">
 
                 {/* Twitter, GitHub, and Discord Page Links */}
-                <div className="col-6 col-lg-3 p-1 text-center">
+                <div className="col-12 col-lg-3 p-1 text-center">
                     <p> <b> Social Media and Links </b> </p>
                     {/* Twitter Page */}
                     <Link
@@ -58,7 +58,7 @@ export default function Footer() {
                 </div>
 
                 {/* NFTs Page Links */}
-                <div className="col-6 col-lg-3 p-1">
+                <div className="col-12 col-lg-3 p-1">
 
                     {/* AstroEmoji NFT */}
                     <Link
@@ -78,7 +78,7 @@ export default function Footer() {
                 </div>
 
                 {/* Docs, and PPeC Address Links */}
-                <div className="col-6 col-lg-3 p-1">
+                <div className="col col-lg-3 p-1">
                     {/* Docs */}
                     <Link
                         title="Docs"
@@ -97,7 +97,7 @@ export default function Footer() {
                 </div>
 
                 {/* Buy PPeC, and Contracts Page Links */}
-                <div className="col-6 col-lg-3 p-1">
+                <div className="col col-lg-3 p-1">
                     {/* Buy PPeC */}
                     <Link
                         extendCSSClass="w-100"
@@ -113,13 +113,6 @@ export default function Footer() {
                         extendCSSClass="w-100 my-3"
                         link="https://github.com/PPeC-Foundation/ppec-erc20-contract/blob/main/ppec.sol"
                     />
-                </div>
-            </div>
-
-            {/* Note */}
-            <div className="row p-2 text-center">
-                <div className="col-sm-5 mx-auto text-center">
-                    <p>The contents of this site are the sole proprietorship of their owners and are not the property of paidperclick.io. Paidperclick is committed to accessibility. That commitment means that we embrace everyone!</p>
                 </div>
             </div>
 
