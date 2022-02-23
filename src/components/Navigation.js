@@ -49,7 +49,7 @@ function Navigation() {
 function NavBar(props) {
     // Important variables
     const { path } = props;
-    const { connected, buyPPeCLink, defaultAccount, connectWalletHandler, claimPPeCDocs, promotePPeCDocs, getPPeCDocs } = useAppContext();
+    const { connected, buyPPeCLink, defaultAccount, connectWalletHandler, claimPPeCDocs, promotePPeCDocs, getPPeCDocs, needMetaMask } = useAppContext();
     // We are truncating `defaultAccount` address. Get the first 5 and the last 3 digits
     const first5Digits = (defaultAccount === null ? "xxx" : defaultAccount.substr(0, 5));
     const last3Digits = (defaultAccount === null ? "xxx" : defaultAccount.substr(39));
@@ -83,21 +83,35 @@ function NavBar(props) {
 
                         {/* Connect Button, Address Button*/}
                         <div className="col-12 col-md">
-                            <div className="btn-group w-100">
-                                {/* Connect Button */}
-                                <button
-                                    type="button"
-                                    onClick={connectWalletHandler}
-                                    className={`btn ${connected ? "disabled btn-dark border-dark" : "btn-primary" }`}
-                                >
-                                    <strong> {connected ? "Connected" : "Connect"} </strong>
-                                </button>
+                            {needMetaMask
+                                // When the user needs to install MetaMask
+                                ? <button
+                                        type="button"
+                                        className="btn disabled btn-danger border border-dark btn-primary"
+                                    >
+                                        <strong> Get MetaMask </strong>
 
-                                {/* Address Button */}
-                                <button type="button" className="btn alert-dark border border-dark disabled">
-                                    <b> {first5Digits}...{last3Digits} </b>
-                                </button>
-                            </div>
+                                    </button>
+
+                                // When the user has MetaMask installed
+                                : <div className="btn-group w-100">
+                                    {/* Connect Button */}
+                                    <button
+                                        type="button"
+                                        onClick={connectWalletHandler}
+                                        className={`btn ${connected ? "disabled btn-dark border-dark" : "btn-primary"}`}
+                                    >
+                                        <strong> {connected ? "Connected" : "Connect"} </strong>
+
+                                    </button>
+
+                                    {/* Address Button */}
+                                    <button type="button" className="btn alert-dark border border-dark disabled">
+                                        <b> {first5Digits}...{last3Digits} </b>
+                                    </button>
+                                </div>
+                            }                                    
+                            
                         </div>
                     </div>
                 </div>
