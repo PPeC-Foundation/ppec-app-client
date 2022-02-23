@@ -84,7 +84,7 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#ffffffeb" }}>
-                <div className="col-12 col-md d-flex justify-content-center align-content-center">
+                <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b>SmAC</b> </h1>
                         <p style={{ fontSize: "1.2rem" }}> Incentive-driven solutions to help your business or project grow at the blockchain speed. Launch your smart ads in <span className="border-bottom">seconds</span>. </p>
@@ -101,7 +101,7 @@ export default function Home() {
                     </div>
 
                 </div>
-                <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
+                <div className="col-12 col-md d-flex justify-content-center align-content-center pb-5 pb-md-0">
                     <div className="p-4 border rounded align-self-center">
                         {/* Background Video */}
                         <video id="promote-video" playsInline autoPlay loop muted className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
