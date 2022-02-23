@@ -71,7 +71,7 @@ export default function Footer() {
                     {/* Digital Woodworks NFT */}
                     <Link
                         icon=""
-                        extendCSSClass="w-100"
+                        extendCSSClass="w-100 mb-3"
                         title="Digital Woodworks NFT"
                         link="https://opensea.io/collection/digital-woodworks"
                     />
