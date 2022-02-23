@@ -114,12 +114,12 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#f8fcfdf2" }}>
-                <div className="col-12 d-flex justify-content-center align-content-center my-5 my-md-0">
-                    <div className="p-3 align-self-center">
+                <div className="col-12 d-flex justify-content-center align-content-center my-3 my-md-0">
+                    <div className="p-3 align-self-center text-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b> Launching your SmAC </b> </h1>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
@@ -130,7 +130,7 @@ export default function Home() {
                         </a>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
@@ -141,7 +141,7 @@ export default function Home() {
                         </a>
                     </div>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-5 my-md-0">
+                <div className="col-12 col-md-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }}> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
