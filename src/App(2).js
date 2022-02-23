@@ -1,16 +1,16 @@
 // React Required --------------------------------------
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState  } from 'react';
 // ethers Required -------------------------------------
 import { ethers } from "ethers";
 // Components ------------------------------------------
-import { Navigation } from "./components/Navigation";
-import Footer from "./components/Footer";
-import Modal from "./components/ModalPromote";
-import Router from "./Router";
+import { Navigation } from "./components/Navigation"; 
+import Footer from "./components/Footer"; 
+import Modal from "./components/ModalPromote"; 
+import Router from "./Router"; 
 // Libs ------------------------------------------------
 // usaAppContext stores - App.js - variables for the entire application
-import { AppContext } from "./libs/contextLib";
-import { abiPPeC, abiSmaCCor, abiSmaC } from "./libs/abiLib";
+import { AppContext } from "./libs/contextLib"; 
+import { abiPPeC, abiSmaCCor, abiSmaC } from "./libs/abiLib"; 
 //------------------------------------------------------ \\
 // This file is exported to ---> src/index.js
 // we use "ads" ----> "SmAC"
@@ -20,9 +20,9 @@ import { abiPPeC, abiSmaCCor, abiSmaC } from "./libs/abiLib";
 
 // Main App Component
 export default function App() {
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Important variables
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     const ethereum = window.ethereum;
     const providerId = Number(process.env.REACT_APP_PROVIDER_CHAINID);
     const [defaultAccount, setDefaultAccount] = useState(null);
@@ -43,9 +43,9 @@ export default function App() {
     const [needMetaMask, setNeedMetaMask] = useState(false);
     const [contractPPeC, setContractPPeC] = useState(null);
     const [contractSmACCor, setContractSmACCor] = useState(null);
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Important Links
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     const documentPPeC = "https://paidperclick.gitbook.io/ppec-docs/";
     const claimPPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/claim";
     const promotePPeCDocs = "https://paidperclick.gitbook.io/ppec-docs/guides/promote";
@@ -56,19 +56,19 @@ export default function App() {
     const chartPPeCLink = "https://analytics.traderjoexyz.com/pairs/0x6fa8417e81fbc0c6bc048f99b01b632ade4b98e4";
     const liquidityPoolPPeCLink = "https://traderjoexyz.com/pool/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e/0xe1498556390645ca488320fe979bc72bdecb6a57#/";
     const buyPPeCLink = "https://traderjoexyz.com/trade?inputCurrency=0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e&outputCurrency=0xe1498556390645ca488320fe979bc72bdecb6a57#/";
-
-    // ----------------------------------------------------------------------
+    
+// ----------------------------------------------------------------------
     // Contract addresses and definitions
     // SmACCor : Smart Ads Contract Creator
     // PPeC : Paid Per Click [ERC20] Token
     // SmAC : Smart Ads Contract (multiple addresses)
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     const addressPPeC = process.env.REACT_APP_PPEC_ADDRESS;
     const addressSmACCor = process.env.REACT_APP_SMACCOR_ADDRESS;
 
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Detecting if the use has MetaMask
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Return elements if MetaMask is installed
     if (typeof window.ethereum !== 'undefined') {
 
@@ -109,10 +109,15 @@ export default function App() {
         ethereum.on("accountsChanged", handleAccountsChanged);
 
     }
-
-    // ----------------------------------------------------------------------
+    // Return elements if MetaMask is not installed
+    else {
+        console.log('MetaMask is not installed!');
+        //setNeedMetaMask(true);
+    }
+    
+// ----------------------------------------------------------------------
     // Reload the application when the user changes the account
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
 
     // Handle connection to MetaMask
     function handleAccountsChanged(accounts) {
@@ -127,10 +132,10 @@ export default function App() {
         }
     }
 
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Connecting to metamask using a button
-    // ----------------------------------------------------------------------
-    function connectWalletHandler() {
+// ----------------------------------------------------------------------
+    function connectWalletHandler() { 
         ethereum
             .request({ method: "eth_requestAccounts" })
             .then(handleAccountsChanged)
@@ -143,89 +148,9 @@ export default function App() {
             });
     }
 
-    // ----------------------------------------------------------------------
-    // Get Contract information
-    // ----------------------------------------------------------------------
-    useEffect(() => {
-        // Get contract information on load
-        async function onLoad() {
-            try {
-
-                // When metamask is installed and connected / Web3 connection
-                if (typeof window.ethereum !== 'undefined' && chainId === providerId) {
-                    // MetaMask Connection
-                    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-                    // Get the signer
-                    const signer = provider.getSigner();
-                    const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
-                    const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
-
-                    // Set variables
-                    setProvider(provider);
-                    setSigner(signer);
-                    setContractPPeC(contractPPeC);
-                    setContractSmACCor(contractSmACCor);
-
-                    // Get the smaccor information
-                    getSmACCor(contractSmACCor);
-                    console.log("In installed ")
-
-                }
-                // When metamask is not installed / RPC connection
-                else {
-                    const provider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_RPC);
-                    const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
-                    const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
-
-                    // Set variables
-                    setProvider(provider);
-                    setContractPPeC(contractPPeC);
-                    setContractSmACCor(contractSmACCor);
-
-                    // Get the smaccor information
-                    getSmACCor(contractSmACCor);
-                    console.log("In not installed ")
-                    
-                }
-
-                // Get smaccor information
-                async function getSmACCor(contractSmACCor) {
-
-                    if (contractSmACCor !== null) {
-                        //Contract Information                
-                        let SmACCor = await contractSmACCor.contractInfo();
-                        let treasuryBalance = ethers.utils.formatUnits(SmACCor[0], 18);
-                        let minBalance = ethers.utils.formatUnits(SmACCor[2], 18);
-                        let promoterFee = SmACCor[3].toNumber();
-                        let claimerFee = SmACCor[4].toNumber();
-                        let minReward = ethers.utils.formatUnits(SmACCor[5], 18);
-                        let adCount = SmACCor[1].toNumber();
-                        //Setter for Contract
-                        setTreasuryBalance(treasuryBalance);
-                        setPromoterFee(promoterFee);
-                        setMinBalance(minBalance);
-                        setClaimerFee(claimerFee);
-                        setMinReward(minReward);
-                        setAdCount(adCount);
-                    }
-                }
-
-
-            } catch (e) {
-                // Error Handling
-                alert(e);
-            }
-        }
-
-        // Returning function when the screen finish loading
-        onLoad();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chainId]);
-
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Get User information
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     useEffect(() => {
         // Update post view - count only
         async function onLoad() {
@@ -253,17 +178,17 @@ export default function App() {
         // Returning function when the screen finish loading
         onLoad();
 
-        // Our clean up happens when we leave the page
+    // Our clean up happens when we leave the page
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultAccount]);
 
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Check MetaMask connection
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     useEffect(() => {
         // Get contract information on load
         async function onLoad() {
-            try {
+            try { 
 
                 // Return elements if MetaMask is installed
                 if (typeof window.ethereum !== 'undefined') {
@@ -282,17 +207,74 @@ export default function App() {
         // Returning function when the screen finish loading
         onLoad();
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+    // Get Contract information
+// ----------------------------------------------------------------------
+    useEffect(() => {
+        // Get contract information on load
+        async function onLoad() {
+            try { 
+
+                // ----------------------------------------------------------------------
+                // A Web3Provider wraps a standard Web3 provider, which is
+                // what MetaMask injects as window.ethereum into each page.
+                // ----------------------------------------------------------------------
+                const provider = new ethers.providers.Web3Provider(window.ethereum, "any"); // Test
+                //const provider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc"); // Live
+                const signer = provider.getSigner(); //Test
+
+                // ----------------------------------------------------------------------
+                // contractPPeC : Paid Per Click [ERC20] Token contract
+                // contractSmACCor : Smart Ads Contract Creator contract
+                // ----------------------------------------------------------------------
+                const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
+                const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
+
+                setProvider(provider);
+                setSigner(signer);
+                setContractPPeC(contractPPeC);
+                setContractSmACCor(contractSmACCor);
+
+                if (contractSmACCor != null) {
+                    //Contract Information                
+                    let SmACCor = await contractSmACCor.contractInfo();
+                    let treasuryBalance = ethers.utils.formatUnits(SmACCor[0], 18);
+                    let minBalance = ethers.utils.formatUnits(SmACCor[2], 18);
+                    let promoterFee = SmACCor[3].toNumber();
+                    let claimerFee = SmACCor[4].toNumber();
+                    let minReward = ethers.utils.formatUnits(SmACCor[5], 18);
+                    let adCount = SmACCor[1].toNumber();
+                    //Setter for Contract
+                    setTreasuryBalance(treasuryBalance);
+                    setPromoterFee(promoterFee);
+                    setMinBalance(minBalance);
+                    setClaimerFee(claimerFee);
+                    setMinReward(minReward);
+                    setAdCount(adCount);
+                }
+            } catch (e) {
+                // Error Handling
+                alert(e);
+            }
+        }
+
+        // Returning function when the screen finish loading
+        onLoad();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+// ----------------------------------------------------------------------
     // Returns a string with value grouped by 3 digits, separated by a "," and "."
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     function commify(number) {
         return ethers.utils.commify(number)
     }
 
-    // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
     // Return UI
     return (
         // Global accessible values (entire app)
@@ -345,10 +327,10 @@ export default function App() {
             {/* Footer Component */}
             <Footer />
 
-            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} buyPPeCLink={buyPPeCLink} />
+            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} buyPPeCLink={buyPPeCLink}/>
 
         </AppContext.Provider>
-    );
+  );
 }
 
 function Errors(props) {
@@ -380,10 +362,10 @@ function Errors(props) {
                 </a>
             </div>
 
-            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${typeof window.ethereum !== 'undefined' && chainId === providerId ? "d-none" : ""}`}>
+            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${chainId !== providerId && needMetaMask === false ? "" : "d-none"}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Please connect to Avalanche Network.</strong>
             </div>
         </div>
-    );
+        );
 }
