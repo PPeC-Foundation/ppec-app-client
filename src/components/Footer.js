@@ -24,11 +24,10 @@ export default function Footer() {
 
                 {/* Twitter, GitHub, and Discord Page Links */}
                 <div className="col-12 col-lg-3 p-1 text-center">
-                    <p> <b> Social Media and Links </b> </p>
                     {/* Twitter Page */}
                     <Link
                         title="Twitter"
-                        extendCSSClass="btn-dark me-2 mb-2"
+                        extendCSSClass="btn-dark mb-3 w-50 border-0"
                         icon="fa fa-twitter"
                         link="https://twitter.com/Paid_PerClick"
                     />
@@ -36,14 +35,14 @@ export default function Footer() {
                     {/* Discord Page */}
                     <Link
                         title="Discord"
-                        extendCSSClass="btn-dark me-2 mb-2"
+                        extendCSSClass="btn-dark mb-3 w-50 border-0"
                         link="#discord"
                     />
 
                     {/* Discord Page */}
                     <Link
                         title="Chart"
-                        extendCSSClass="btn-success me-2 mb-2"
+                        extendCSSClass="btn-dark mb-2 w-50 border-0"
                         link={chartPPeCLink}
                         icon="fa fa-line-chart"
                     />
@@ -51,7 +50,7 @@ export default function Footer() {
                     {/* GitHub Page */}
                     <Link
                         title="GitHub"
-                        extendCSSClass="btn-dark mb-2"
+                        extendCSSClass="btn-dark mb-2 w-50 border-0"
                         icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
                     />
