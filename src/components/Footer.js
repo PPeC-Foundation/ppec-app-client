@@ -28,7 +28,7 @@ export default function Footer() {
                     {/* Twitter Page */}
                     <Link
                         title=""
-                        extendCSSClass="btn-primary me-3 mb-3"
+                        extendCSSClass="btn-primary me-3 mb-2"
                         icon="fa fa-twitter"
                         link="https://twitter.com/Paid_PerClick"
                     />
@@ -36,7 +36,7 @@ export default function Footer() {
                     {/* GitHub Page */}
                     <Link
                         title=""
-                        extendCSSClass="btn-dark me-3 mb-3"
+                        extendCSSClass="btn-dark me-3 mb-2"
                         icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
                     />
@@ -44,14 +44,14 @@ export default function Footer() {
                     {/* Discord Page */}
                     <Link
                         title="Discord"
-                        extendCSSClass="btn-danger me-3 mb-3"
+                        extendCSSClass="btn-danger me-3 mb-2"
                         link="#discord"
                     />
 
                     {/* Discord Page */}
                     <Link
                         title="Chart"
-                        extendCSSClass="btn-success me-3 mb-3"
+                        extendCSSClass="btn-success me-3 mb-2"
                         link={chartPPeCLink}
                         icon="fa fa-line-chart"
                     />
