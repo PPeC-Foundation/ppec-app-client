@@ -5,7 +5,7 @@ import React from 'react';
 import { useAppContext } from "../libs/contextLib";
 // Video------------------------------------------------
 import backgroundVideo from '../ppecwalk.mp4';
-import promoteVideo from '../promote.mov';
+import promoteVideo from '../promote.mp4';
 //------------------------------------------------------ \\
 // This file is exported to ---> src/Routes.js
 // we use "ads" ----> "SmAC"
