@@ -1,17 +1,43 @@
+// React Required --------------------------------------
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+// Amplify - User interation with Cognito and S3 -------
+import Amplify from 'aws-amplify';
+// config - AWS credentials ----------------------------
+import config from './config';
+// Container -------------------------------------------
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// CSS -------------------------------------------------
+import './index.css';
+//------------------------------------------------------ \\
+// This file is the main application and renders to --> public/index.html
+// we use "ads" ----> "SmAC"
+// we use "myads" ----> "U|SmAC"
+// -------------- Application Begins Bellow ------------ //
+
+// Amplify enables connection with AWS
+// Informations from ---> src/config.js
+Amplify.configure({
+
+    // Auth - to authenticate requests
+    Auth: {
+        mandatorySignIn: false,
+        region: config.s3.REGION,
+        identityPoolId: config.cognito.IDENTITY_POOL_ID
+    },
+
+    // Storage - AWS S3 Bucket for file storage
+    Storage: {
+        region: config.s3.REGION,
+        bucket: config.s3.BUCKET,
+        identityPoolId: config.cognito.IDENTITY_POOL_ID
+    }
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
