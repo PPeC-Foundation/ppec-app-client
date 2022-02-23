@@ -29,7 +29,7 @@ export default function Footer() {
                     <Link
                         title=""
                         extendCSSClass="btn-primary me-3 mb-3"
-                        icon="fab fa-twitter"
+                        icon="fa fa-twitter"
                         link="https://twitter.com/Paid_PerClick"
                     />
 
@@ -38,14 +38,14 @@ export default function Footer() {
                         title=""
                         extendCSSClass="btn-danger me-3 mb-3"
                         link="#discord"
-                        icon="fab fa-discord"
+                        icon="fa fa-discord"
                     />
 
                     {/* GitHub Page */}
                     <Link
                         title=""
                         extendCSSClass="btn-dark me-3 mb-3"
-                        icon="fab fa-github"
+                        icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
                     />
 
@@ -54,7 +54,7 @@ export default function Footer() {
                         title="Chart"
                         extendCSSClass="btn-success me-3 mb-3"
                         link={chartPPeCLink}
-                        icon="fas fa-chart-line"
+                        icon="fa fa-chart-line"
                     />
                 </div>
 
