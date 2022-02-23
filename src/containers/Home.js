@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <main className="container-fluid" >
             {/* Background Video */}
-            <video id="background-video" playsinline autoPlay loop style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
+            <video id="background-video" playsinline autoPlay loop muted style={{ position: "fixed", zIndex: "-1", padding: "0", margin: "-12px", top: "0", height: "120%", width: "100%", objectFit: "cover", opacity: "0.25" }}>
                 <source src={backgroundMP4} type="video/mp4" />
                 <source src={backgroundMOV} type="video/mov" />
                 <source src={backgroundWEBM} type="video/webm" />
@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-4 border rounded align-self-center">
                         {/* Background Video */}
-                        <video id="promote-video" playsinline autoPlay loop className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
+                        <video id="promote-video" playsinline autoPlay loop muted className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
                             <source src={promoteVideo} type="video/mp4" />
                             <source src={promoteVideo} type="video/ogg" />
                             Your browser does not support the video tag.
