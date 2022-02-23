@@ -356,7 +356,7 @@ function Errors(props) {
                 </a>
             </div>
 
-            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${chainId != providerId && needMetaMask === false ? "" : "d-none"}`}>
+            <div className={`alert alert-danger alert-dismissible fade text-center show shadow border border-dark ${chainId !== providerId && needMetaMask === false ? "" : "d-none"}`}>
                 <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Please connect to Avalanche Network.</strong>
             </div>
