@@ -32,7 +32,7 @@ export default function Home() {
                 <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ height: "calc(100vh - 100px)"}}>
                     <div className="text-dark rounded align-self-center">
                         <h1 style={{ fontSize: "3rem", fontFamily: "'Russo One', sans-serif" }}> Decentralizing Advertisement with a <strong className=""> SmAC </strong> </h1>
-                        <p className="text-primary" style={{ fontSize: "1.2rem" }}>
+                        <p className="text-dark" style={{ fontSize: "1.2rem" }}>
                             <strong> 
                                 <span> Explore a brand new way to advertise and get more traffic with </span>
                                 <a

@@ -37,7 +37,7 @@ export default function Card(props) {
 // ----------------------------------------------------------------------
     // Return UI
     return (
-        <div className="col-6 col-lg-3 col-md-4 p-1 mb-3 d-block" key={id}>
+        <div className="col-12 col-lg-3 col-md-4 p-1 mb-3 d-block" key={id}>
             <div className="text-dark h-100">
                 <article id="Card" className="card border-0 h-100">
 
