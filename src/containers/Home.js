@@ -85,16 +85,6 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#ffffffeb" }}>
-                <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
-                    <div className="p-4 border rounded align-self-center">
-                        {/* Background Video */}
-                        <video id="promote-video" playsInline autoPlay loop muted className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
-                            <source src={promoteVideo} type="video/mp4" />
-                            <source src={promoteVideo} type="video/ogg" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
                 <div className="col-12 col-md d-flex justify-content-center align-content-center">
                     <div className="p-3 align-self-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b>SmAC</b> </h1>
@@ -111,6 +101,16 @@ export default function Home() {
                         </a>
                     </div>
 
+                </div>
+                <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
+                    <div className="p-4 border rounded align-self-center">
+                        {/* Background Video */}
+                        <video id="promote-video" playsInline autoPlay loop muted className="bg-white border border-secondary p-1 rounded shadow" style={{ width : "300px" }}>
+                            <source src={promoteVideo} type="video/mp4" />
+                            <source src={promoteVideo} type="video/ogg" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
             </div>
             
