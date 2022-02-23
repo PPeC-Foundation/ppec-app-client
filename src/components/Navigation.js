@@ -86,8 +86,8 @@ function NavBar(props) {
                             {needMetaMask
                                 // When the user needs to install MetaMask
                                 ? <button
-                                        type="button"
-                                        className="btn disabled btn-danger border border-dark btn-primary"
+                                    type="button"
+                                    className="btn disabled btn-danger border border-dark btn-primary w-100"
                                     >
                                         <strong> Get MetaMask </strong>
 
