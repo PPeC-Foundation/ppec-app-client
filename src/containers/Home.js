@@ -81,7 +81,8 @@ export default function Home() {
 
                             {/* Start Earning */}
                             <a
-                                href="/ads"
+                                rel="noopener noreferrer"
+                                href={liquidityPoolPPeCLink}
                                 style={{ fontSize: "1.2rem" }}
                                 className="btn btn-primary border border-dark"
                             >
@@ -97,7 +98,7 @@ export default function Home() {
             <div className="row bg-dark d-flex justify-content-center align-content-center p-0">
                 <div className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
                     <div className="p-3 align-self-center text-center text-white">
-                        <div class="btn-group">
+                        <div className="btn-group w-100">
                             <div className="btn btn-outline-light"> Minimum reward </div>
                             <div className="btn alert-light"> <strong> {commify(minReward)} </strong> PPeC </div>
                         </div>
@@ -105,7 +106,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
                     <div className="p-3 align-self-center text-center text-white pt-0 pt-lg-3">
-                        <div class="btn-group mt-0">
+                        <div className="btn-group mt-0 w-100">
                             <div className="btn btn-outline-light"> Minimum Balance </div>
                             <div className="btn alert-light"> <strong> {commify(minBalance)} </strong> PPeC </div>
                         </div>
