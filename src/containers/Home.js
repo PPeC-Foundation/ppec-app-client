@@ -61,7 +61,7 @@ export default function Home() {
                             <a
                                 href="/ads"
                                 style={{ fontSize: "1.2rem" }}
-                                className="btn btn-dark"
+                                className="btn btn-primary border border-dark"
                             >
                                 <strong> Start|Earning </strong>
                             </a>
