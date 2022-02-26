@@ -237,7 +237,7 @@ export default function Home() {
                 <div className="col-12 d-flex justify-content-center align-content-center my-3 my-md-0">
                     <div className="p-3 align-self-center text-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b> How to use PPeC </b> </h1>
-                        <p>  </p>
+                        <p> powering the decentralized advertisement <i> (DAdvers) </i> world </p>
                     </div>
                 </div>
                 <div className="col-6 col-lg-3 d-flex justify-content-center align-content-center my-4 my-md-0">
