@@ -29,7 +29,7 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row m-0">
-                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ minHeight: "calc(100vh - 140px)"}}>
+                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ minHeight: "calc(100vh - 160px)"}}>
                     <div className="text-dark rounded align-self-center">
                         <h1 style={{ fontSize: "3rem", fontFamily: "'Russo One', sans-serif" }}> Decentralizing Advertisement with a <strong className=""> SmAC </strong> </h1>
                         <p className="text-dark" style={{ fontSize: "1.2rem" }}>
