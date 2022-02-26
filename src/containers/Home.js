@@ -45,7 +45,7 @@ export default function Home() {
                                 </a>
                             </strong>
                         </p>
-                        <div className="btn-group me-0 me-lg-3 mb-3 mb-lg-0">
+                        <div className="btn-group me-0 me-sm-3 mb-3 mb-sm-0">
                             {/* Learn More */}
                             <a
                                 target="_blank"
