@@ -45,17 +45,28 @@ export default function Home() {
                                 </a>
                             </strong>
                         </p>
-                        <div className="btn-group">
+                        <div className="btn-group me-0 me-lg-3 mb-3 mb-lg-0">
                             {/* Learn More */}
                             <a
                                 target="_blank"
                                 href={documentPPeC}
                                 rel="noopener noreferrer"
                                 style={{ fontSize: "1.2rem" }}
-                                className="btn btn-warning border border-dark shadow"
+                                className="btn btn-warning border border-dark"
                             >
                                 <strong> Lear|More </strong>
                             </a>
+
+                            {/* Start Earning */}
+                            <a
+                                href="/ads"
+                                style={{ fontSize: "1.2rem" }}
+                                className="btn btn-dark"
+                            >
+                                <strong> Start|Earning </strong>
+                            </a>
+                        </div>
+                        <div className="btn-group">
 
                             {/* Buy PPeC */}
                             <a
@@ -72,9 +83,9 @@ export default function Home() {
                             <a
                                 href="/ads"
                                 style={{ fontSize: "1.2rem" }}
-                                className="btn btn-dark shadow"
+                                className="btn btn-primary border border-dark"
                             >
-                                <strong> Start|Earning </strong>
+                                <strong> Provide|Liquidity </strong>
                             </a>
                         </div>
 
@@ -232,7 +243,7 @@ export default function Home() {
                     <div className="p-3 align-self-center text-center">
                         <span style={{ fontSize: "4rem" }} role="img" aria-label="bank"> &#127974; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Hold </h2>
-                        <p> Get PPeC by swapping with USDC</p>
+                        <p> Get PPeC with USDC</p>
                         <a href={buyPPeCLink} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
                             <i className='fa fa-bitcoin'></i>
                             <b> Get|PPeC </b>
@@ -287,7 +298,7 @@ export default function Home() {
                         >
                             {/* icon */}
                             <i className="fa fa-cubes"></i>
-                            <strong> Stake|Liquidity </strong>
+                            <strong> Stake </strong>
                         </a>
                     </div>
                 </div>
