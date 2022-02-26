@@ -52,7 +52,7 @@ export default function Home() {
                                 href={documentPPeC}
                                 rel="noopener noreferrer"
                                 style={{ fontSize: "1.2rem" }}
-                                className="btn btn-warning border border-dark"
+                                className="btn btn-dark text-warning border border-dark shadow"
                             >
                                 <strong> Lear|More </strong>
                             </a>
@@ -61,12 +61,12 @@ export default function Home() {
                             <a
                                 href="/ads"
                                 style={{ fontSize: "1.2rem" }}
-                                className="btn btn-primary border border-dark"
+                                className="btn btn-primary border border-dark shadow"
                             >
                                 <strong> Start|Earning </strong>
                             </a>
                         </div>
-                        <div className="btn-group">
+                        <div className="btn-group shadow">
 
                             {/* Buy PPeC */}
                             <a
@@ -126,7 +126,7 @@ export default function Home() {
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No credential needed </b> </li>
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> On standby audience </b> </li>
                         </ul>
-                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark mt-3 shadow-sm" rel="noopener noreferrer">
+                        <a href={documentPPeC} target="_blank" className="btn btn-dark text-warning border border-dark mt-3 shadow" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
                         </a>
@@ -176,7 +176,7 @@ export default function Home() {
                                 target="_blank"
                                 href={getPPeCDocs}
                                 rel="noopener noreferrer"
-                                className="btn btn-dark text-warning border border-end-0 border-dark"
+                                className="btn btn-dark text-warning border border-end-0 border-dark shadow"
                             >
                                 {/* icon */}
                                 <i className="fa fa-file-text"></i>
@@ -209,7 +209,7 @@ export default function Home() {
                                 target="_blank"
                                 href={promotePPeCDocs}
                                 rel="noopener noreferrer"
-                                className="btn btn-dark text-warning border border-end-0 border-dark"
+                                className="btn btn-dark text-warning border border-end-0 border-dark shadow"
                             >
                                 {/* icon */}
                                 <i className="fa fa-file-text"></i>
