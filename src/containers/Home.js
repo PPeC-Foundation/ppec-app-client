@@ -15,7 +15,9 @@ import promoteVideo from '../promote.mp4';
 
 export default function Home() {
     // Important variables
-    const { documentPPeC, buyPPeCLink, promotePPeCDocs, getPPeCDocs, liquidityPoolPPeCLink } = useAppContext();
+    const { documentPPeC, buyPPeCLink, promotePPeCDocs, getPPeCDocs, liquidityPoolPPeCLink, minBalance, minReward, commify } = useAppContext();
+
+    // Return UI
     return (
         <main className="container-fluid" >
             {/* Background Video */}
@@ -27,7 +29,7 @@ export default function Home() {
 
             {/* Jumbotron */}
             <div className="row m-0">
-                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ height: "calc(100vh - 100px)"}}>
+                <div className="col col-lg-8 mx-auto d-flex justify-content-center align-content-center text-center" style={{ minHeight: "calc(100vh - 140px)"}}>
                     <div className="text-dark rounded align-self-center">
                         <h1 style={{ fontSize: "3rem", fontFamily: "'Russo One', sans-serif" }}> Decentralizing Advertisement with a <strong className=""> SmAC </strong> </h1>
                         <p className="text-dark" style={{ fontSize: "1.2rem" }}>
@@ -80,6 +82,26 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* Info Bar */}
+            <div className="row bg-dark d-flex justify-content-center align-content-center p-0">
+                <div className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
+                    <div className="p-3 align-self-center text-center text-white">
+                        <div class="btn-group">
+                            <div className="btn btn-outline-light"> Minimum reward </div>
+                            <div className="btn alert-light"> <strong> {commify(minReward)} </strong> PPeC </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
+                    <div className="p-3 align-self-center text-center text-white pt-0 pt-lg-3">
+                        <div class="btn-group mt-0">
+                            <div className="btn btn-outline-light"> Minimum Balance </div>
+                            <div className="btn alert-light"> <strong> {commify(minBalance)} </strong> PPeC </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#ffffffeb" }}>
                 <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
@@ -110,7 +132,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-
 
             {/* Jumbotron */}
             <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#f8fcfdf2" }}>
