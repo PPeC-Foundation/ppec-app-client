@@ -15,7 +15,7 @@ import promoteVideo from '../promote.mp4';
 
 export default function Home() {
     // Important variables
-    const { documentPPeC, buyPPeCLink, promotePPeCDocs, getPPeCDocs } = useAppContext();
+    const { documentPPeC, buyPPeCLink, promotePPeCDocs, getPPeCDocs, liquidityPoolPPeCLink } = useAppContext();
     return (
         <main className="container-fluid" >
             {/* Background Video */}
@@ -87,7 +87,7 @@ export default function Home() {
                         <h1 style={{ fontSize: "2.5rem" }}> <b>SmAC</b> </h1>
                         <p style={{ fontSize: "1.2rem" }}> Incentive-driven solutions to help your business or project grow at the blockchain speed. Launch your smart ads in <span className="border-bottom">seconds</span>. </p>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No Fees </b> </li>
+                            <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No launch fees </b> </li>
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No waiting for approval </b> </li>
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No credential needed </b> </li>
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> On standby audience </b> </li>
@@ -122,7 +122,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 col-md-7 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
-                        <span style={{ fontSize: "4rem" }}> &#10102; </span>
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="1"> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
                         <p>Once you've set up your MetaMask wallet with Avalanche Network, connect it by clicking the <strong> connect </strong> button in the top right corner.</p>
                         <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
@@ -133,7 +133,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
-                        <span style={{ fontSize: "4rem" }}> &#10103; </span>
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="2"> &#10103; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Fund your wallet </h2>
                         <p> When you are connected to PaidPerClick click on the <strong> Get|PPeC </strong> button on the navigation bar to swap USDC for $PPeC.</p>
                         {/* Button Group */}
@@ -166,7 +166,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-content-center my-4 my-md-0">
                     <div className="p-3 align-self-center text-center">
-                        <span style={{ fontSize: "4rem" }}> &#10104; </span>
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="3"> &#10104; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Launch your SmAC </h2>
                         <p> With your wallet fully funded, your are ready to launch your SmAC. Click on the <strong> promote </strong> button to launch a SmAC.</p>
                         {/* Button Group */}
@@ -194,6 +194,80 @@ export default function Home() {
                                 <b> Promote|SmAC </b>
                             </button>
                         </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            {/* Jumbotron */}
+            <div className="row d-flex justify-content-center align-content-center p-0" style={{ minHeight: "calc(100vh)", backgroundColor: "#fbfeffde" }}>
+                <div className="col-12 d-flex justify-content-center align-content-center my-3 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <h1 style={{ fontSize: "2.5rem" }}> <b> How to use PPeC </b> </h1>
+                        <p>  </p>
+                    </div>
+                </div>
+                <div className="col-6 col-lg-3 d-flex justify-content-center align-content-center my-4 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="bank"> &#127974; </span>
+                        <h2 style={{ fontSize: "1.7rem" }}> Hold </h2>
+                        <p> Get PPeC by swapping with USDC</p>
+                        <a href={buyPPeCLink} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
+                            <i className='fa fa-bitcoin'></i>
+                            <b> Get|PPeC </b>
+                        </a>
+                    </div>
+                </div>
+                <div className="col-6 col-lg-3 d-flex justify-content-center align-content-center my-4 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="diamond"> &#128142; </span>
+                        <h2 style={{ fontSize: "1.7rem" }}> Claim </h2>
+                        <p> Claiming rewards, Increase holdings </p>
+                        {/* Link */}
+                        <a
+                            href="/ads"
+                            className="btn btn-primary border border-dark shadow-sm"
+                        >
+                            {/* name */}
+                            <i className="fa fa-bullhorn"></i>
+                            <strong> SmAC </strong>
+                        </a>
+                    </div>
+                </div>
+                <div className="col-6 col-lg-3 d-flex justify-content-center align-content-center my-4 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="trade usd yen"> &#128177; </span>
+                        <h2 style={{ fontSize: "1.7rem" }}> Trade </h2>
+                        <p> Trade PPeC on Avalanche DEX</p>
+                        {/* Link */}
+                        <a
+                            target="_blank"
+                            href={buyPPeCLink}
+                            rel="noopener noreferrer"
+                            className="btn btn-primary border border-dark shadow-sm"
+                        >
+                            {/* icon */}
+                            <i className='fa fa-bitcoin'></i>
+                            <b> Trade|PPeC </b>
+                        </a>
+                    </div>
+                </div>
+                <div className="col-6 col-lg-3 d-flex justify-content-center align-content-center my-4 my-md-0">
+                    <div className="p-3 align-self-center text-center">
+                        <span style={{ fontSize: "4rem" }} role="img" aria-label="lightning bolt"> &#9889; </span>
+                        <h2 style={{ fontSize: "1.7rem" }}> Vault </h2>
+                        <p> Stake and Provide liquidity</p>
+                        {/* Link */}
+                        <a
+                            target="_blank"
+                            href={liquidityPoolPPeCLink}
+                            rel="noopener noreferrer"
+                            className="btn btn-primary border border-dark shadow-sm"
+                        >
+                            {/* icon */}
+                            <i className="fa fa-cubes"></i>
+                            <strong> Stake|Liquidity </strong>
+                        </a>
                     </div>
                 </div>
                 

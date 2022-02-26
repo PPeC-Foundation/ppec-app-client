@@ -7,7 +7,7 @@ const dev = {
     },
     cognito: {
         REGION: process.env.REACT_APP_AWS_REGION,
-        IDENTITY_POOL_ID: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
+        IDENTITY_POOL_ID: process.env.REACT_APP_AWS_IDENTITY_POOL_ID
     }
 };
 

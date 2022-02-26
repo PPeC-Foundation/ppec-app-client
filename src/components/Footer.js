@@ -35,8 +35,9 @@ export default function Footer() {
                     {/* Discord Page */}
                     <Link
                         title="Discord"
+                        icon="fa fa-commenting-o"
                         extendCSSClass="btn-dark mb-3 w-50 border-0"
-                        link="#discord"
+                        link="https://discord.gg/5uDdmRQk4N"
                     />
 
                     {/* Discord Page */}
