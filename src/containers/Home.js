@@ -158,7 +158,7 @@ export default function Home() {
                         <span style={{ fontSize: "4rem" }} role="img" aria-label="1"> &#10102; </span>
                         <h2 style={{ fontSize: "1.7rem" }}> Setup your wallet </h2>
                         <p>Once you've set up your MetaMask wallet with Avalanche Network, connect it by clicking the <strong> connect </strong> button in the top right corner.</p>
-                        <a href={documentPPeC} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
+                        <a href={documentPPeC} target="_blank" className="btn btn-dark text-warning border border-dark shadow" rel="noopener noreferrer">
                             <i className='fa fa-file-text'></i>
                             <b> Learn|More </b>
                         </a>
