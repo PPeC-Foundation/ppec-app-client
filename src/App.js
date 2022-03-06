@@ -124,7 +124,7 @@ export default function App() {
     // ----------------------------------------------------------------------
     // //Request an ethereum account 1800000000000000000000000
     // ---------------------------------------------------------------------- 
-    if (window.ethereum.isConnected()) {
+    if (window.ethereum.isConnected() === true) {
 
         ethereum
             .request({

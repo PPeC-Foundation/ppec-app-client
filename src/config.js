@@ -7,7 +7,7 @@ const dev = {
     },
     apiGateway: {
         REGION: process.env.REACT_APP_AWS_REGION,
-        URL: process.env.REACT_APP_AWS_URL
+        URL: "https://jbz1vcvfve.execute-api.us-east-2.amazonaws.com/prod"
     },
     cognito: {
         REGION: process.env.REACT_APP_AWS_REGION,
