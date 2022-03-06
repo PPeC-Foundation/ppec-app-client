@@ -95,7 +95,21 @@ export default function App() {
             })
             .catch((err) => {
                 console.error(`Error fetching chainId: ${err.code}: ${err.message}`);
-            });       
+            });
+
+        // --------------------------------------------------------------
+        // //Request an ethereum account
+        // --------------------------------------------------------------  
+        if (window.ethereum.isConnected() === true) {
+            ethereum
+                .request({
+                    method: "eth_requestAccounts"
+                })
+                .then(handleAccountsChanged)
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
 
         // --------------------------------------------------------------        
         // Listen to account changes
@@ -120,19 +134,6 @@ export default function App() {
             setConnected(true);
         }
     }
-
-    // ----------------------------------------------------------------------
-    // //Request an ethereum account
-    // ---------------------------------------------------------------------- 
-
-    ethereum
-        .request({
-            method: "eth_requestAccounts"
-        })
-        .then(handleAccountsChanged)
-        .catch((err) => {
-            console.error(err);
-        });
  
     // ----------------------------------------------------------------------
     // Connecting to metamask using a button
