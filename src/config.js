@@ -21,6 +21,10 @@ const prod = {
         REGION: process.env.REACT_APP_AWS_REGION,
         BUCKET: process.env.REACT_APP_AWS_BUCKET
     },
+    apiGateway: {
+        REGION: process.env.REACT_APP_AWS_REGION,
+        URL: process.env.REACT_APP_AWS_URL
+    },
     cognito: {
         REGION: process.env.REACT_APP_AWS_REGION,
         IDENTITY_POOL_ID: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,

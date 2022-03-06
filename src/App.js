@@ -323,6 +323,9 @@ export default function App() {
         return ethers.utils.commify(number)
     }
 
+    // ----------------------------------------------------------------------
+    // Returns a specified amount of digits for numbers.
+    // ----------------------------------------------------------------------
     function decimal(number) {
         return Number(number).toLocaleString('en-IN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
     }
