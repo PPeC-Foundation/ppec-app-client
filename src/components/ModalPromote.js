@@ -4,6 +4,8 @@ import React, { useRef, useState } from 'react';
 import { s3Upload } from "../libs/awsLib";
 import { useFields } from "../libs/hooksLib";
 import { useAppContext } from "../libs/contextLib";
+// Components ------------------------------------------
+import LoaderButton from "./LoaderButton";
 // AWS Config ------------------------------------------
 import config from "../config";
 //------------------------------------------------------ \\
@@ -70,6 +72,9 @@ export default function ModalPomote() {
     async function handleNewAd(event) {
         event.preventDefault();
 
+        // Start loading
+        setIsLoading(true);
+
         // Checking images' size
         if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
             alert(
@@ -104,13 +109,17 @@ export default function ModalPomote() {
                     // rejects the transaction.
                     // 4001 : user rejected transaction error
                     if (error.code === 4001) {
-                        setHasSubmitted(false)
+                        setHasSubmitted(false);
+                        // Stop loading
+                        setIsLoading(false);
                     }
                 });
 
         } catch (e) {
             // Error Handling
-            alert(e);            
+            alert(e);
+            // Stop loading
+            setIsLoading(false);
         }
     }
 
@@ -130,6 +139,8 @@ export default function ModalPomote() {
         } catch (e) {
             // Error Handling
             alert(e);
+            // Stop loading
+            setIsLoading(false);
         }
 
         // Stop loading
@@ -412,27 +423,15 @@ export default function ModalPomote() {
                     {/* Modal Footer */}
                     <div className="modal-footer">
                         {/* Button - Submit */}
-                        <button
+                        <LoaderButton
                             type="button"
                             onClick={handleNewAd}
+                            isLoading={isLoading}
                             disabled={!validateForm()}
                             className={`btn btn-primary border border-dark ${hasSubmitted ? "disabled" : null}`}
-                        >
-                            {/* 
-                             * ------------------------------------------------------------------------------------------>
-                             * Icon - Display spinner when loading
-                             * ------------------------------------------------------------------------------------------>
-                             * */}
-                            {isLoading
-                                // Display icon when the request is loading
-                                ? <small> <i className="spinner-border text-light spinner-border-sm"></i> </small>
-                                // Display icon when the request is not loading
-                                : <i className="fa fa-plus-square"></i>
-                            }                            
-
-                            {/* Label */}
+                        >                        
                             <span> {hasSubmitted ? "PROMOTING" : "PROMOTE"} </span>
-                        </button> 
+                        </LoaderButton>
                         
                         {/* Button - Close */}
                         <button type="button" className="btn btn-danger border border-dark" data-bs-dismiss="modal">Close</button>

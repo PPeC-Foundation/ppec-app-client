@@ -1,5 +1,7 @@
 // React Required --------------------------------------
 import React, { useEffect, useState, Fragment } from 'react';
+// Ampligy Required ------------------------------------
+import { API } from "aws-amplify";
 // Components ------------------------------------------
 import Card from "../components/Card";
 import Modal from "../components/ModalPages";
@@ -14,13 +16,14 @@ import { useAppContext } from "../libs/contextLib";
 // we use "myads" ----> "U|SmAC"
 // -------------- Application Begins Bellow ------------ //
 
-// Main Function - Home
+// Main Function - Ads
 export default function Ads() {
     // Important variables
     const { ethers, defaultAccount, contractSmACCor, abiSmaC, signer, provider, chainId, providerId } = useAppContext();
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [ads, setAds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isClaiming, setIsClaiming] = useState(false);
+    const [ads, setAds] = useState([]);
 
 // ----------------------------------------------------------------------
     // Load All Ads - Ads that have not expired and have been funded.
@@ -35,11 +38,11 @@ export default function Ads() {
                 // Check that we have not unmounted
                 if (!unmounted && contractSmACCor != null) {
                     // Contract Information
-                    let SmACCor = await contractSmACCor.contractInfo();
+                    const SmACCor = await contractSmACCor.contractInfo();
                     // Get the ad count for the for loop
-                    let adCount = SmACCor[1].toNumber();
+                    const adCount = SmACCor[1].toNumber();
                     // Create a new array
-                    let ads = [];
+                    const ads = [];
 
                     // Get current account ads - Looping through our array backward - MoonWalk JS ;)
                     for (let i = adCount - 1; i >= 0; i--) {
@@ -52,7 +55,7 @@ export default function Ads() {
                         const contractSub = new ethers.Contract(addressSmAC, abiSmaC, (defaultAccount != null && chainId === providerId ? signer : provider));
 
                         // Get contract information
-                        let items = await contractSub.getInfo();
+                        const items = await contractSub.getInfo();
                         const promoter = items[11].toLocaleUpperCase();
                         const currentAccount = (defaultAccount === null ? null : defaultAccount.toLocaleUpperCase());
 
@@ -113,16 +116,32 @@ export default function Ads() {
 
     // Our clean up happens when we leave the page and the defaultAccount changes
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultAccount]);
+    }, [defaultAccount, chainId, contractSmACCor]);
 
 // ----------------------------------------------------------------------
     // Claim smart ad reward
 // ----------------------------------------------------------------------
-    function handleClaim(contractAddr, link) {
+    async function handleClaim(contractAddr, link) {
         // Disable the submit button to avoid multiple requests
         setHasSubmitted(true);
+        setIsClaiming(true);
 
         try {
+
+            function loadHash() {
+                return API.get("hashes", `/hash/filter/${defaultAccount}`);
+
+            }
+
+            function loadNewHash() {
+                return API.get("hashes", `/hash/newHashes`);
+            }
+
+            const hash = await loadHash();
+            const newHash = await loadNewHash();
+            // Pick a Random hash 
+            const randomHash = newHash[Math.floor(Math.random() * newHash.length)];
+
             // Create a new contract
             const contractSmAC = new ethers.Contract(contractAddr, abiSmaC, signer);
             // Connect the signer to the contract
@@ -130,27 +149,73 @@ export default function Ads() {
 
             // Call claim() function in SmAC
             SmACWithSigner
-                .claim()
+                .claim(hash[0].wordId, randomHash.hashedWord)
                 .then(() => {
                     // Redirect user to the promoter's page
                     // once the claim is successfull.
                     SmACWithSigner.once("Claim", (event) => {
-                        window.location.replace(link);
+                        // Perform update in database
+                        updateRequests(hash[0].wordId, randomHash.createdAt, randomHash.prefix, link);
                     });                    
                 })
                 .catch((error) => {
                     // Set submitted to false if the user 
                     // rejects the transaction.
                     // 4001 : user rejected transaction error
-                    if (error.code === 4001) {
-                        setHasSubmitted(false)
+                    if (error.code === 4001 || error.code === -32603) {
+                        setHasSubmitted(false);
+                        setIsClaiming(false);
                     }
                 });
 
         } catch (e) {
             // Error Handling
             alert(e.message);
+            setIsClaiming(false);
         }
+    }
+
+    // ----------------------------------------------------------------------
+    // Performing important updates to database
+    // ----------------------------------------------------------------------
+    async function updateRequests(key, time, prefix, link) {
+
+        // (1) Remove _ the revealed hash from our database
+        await deleteHash(key);
+        // (2) Set _ a new hash for the default account
+        await setDefaultAccountHash({ time, prefix, "address": defaultAccount });
+        // (3) Generate _ new hashes
+        await createHash();
+
+        // Replace the current window with the promoter link
+        window.location.replace(link);
+    }
+
+    // ----------------------------------------------------------------------
+    // Deleting hash from DynamoDB
+    // ----------------------------------------------------------------------
+    function deleteHash(hash) {
+        // Delete post based on "id" - Current user
+        return API.del("hashes", `/hash/del/${hash}`);
+    }
+
+    // ----------------------------------------------------------------------
+    // Updating hash with a new account in DynamoDB
+    // ----------------------------------------------------------------------
+    function setDefaultAccountHash(items) {
+        return API.put("hashes", `/hash/newUserHash`, {
+            body: items
+        });
+    }
+
+    // ----------------------------------------------------------------------
+    // Creating/Generating a new hash for DynamoDB
+    // ----------------------------------------------------------------------
+    function createHash(items) {
+        // Create a post
+        return API.post("hashes", "/hash/create", {
+            body: items
+        });
     }
 
 // ----------------------------------------------------------------------
@@ -165,7 +230,7 @@ export default function Ads() {
                         ? <NoAvailableAds />
 
                         // When there are SmAC -------------------------- >
-                        : <WithAds ads={ads} handleClaim={handleClaim} hasSubmitted={hasSubmitted} />
+                        : <AvailableAds ads={ads} handleClaim={handleClaim} hasSubmitted={hasSubmitted} isClaiming={isClaiming} />
                     }                    
                 </>
 
@@ -177,12 +242,12 @@ export default function Ads() {
 }
 
 // ----------------------------------------------------------------------
-// WithAds Component
-// Return SmAC
+// AvailableAds Component
+// Return available Ads/SmAC
 // ----------------------------------------------------------------------
-function WithAds(props) {
+function AvailableAds(props) {
     // Important variables
-    const { ads, handleClaim, hasSubmitted } = props;
+    const { ads, handleClaim, hasSubmitted, isClaiming } = props;
 
     // Return UI
     return (
@@ -235,6 +300,7 @@ function WithAds(props) {
                             key={"modal" + ad.id}
                             claimers={ad.claimers}
                             promoter={ad.promoter}
+                            isClaiming={isClaiming}
                             handleClaim={handleClaim}
                             scamReport={ad.scamReport}
                             hasSubmitted={hasSubmitted}

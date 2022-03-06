@@ -27,6 +27,16 @@ Amplify.configure({
         identityPoolId: config.cognito.IDENTITY_POOL_ID
     },
 
+    API: {
+        endpoints: [
+            {
+                name: "hashes",
+                endpoint: config.apiGateway.URL,
+                region: config.apiGateway.REGION
+            },
+        ]
+    },
+
     // Storage - AWS S3 Bucket for file storage
     Storage: {
         region: config.s3.REGION,

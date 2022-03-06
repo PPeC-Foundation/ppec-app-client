@@ -21,6 +21,7 @@ export default function MyAds() {
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [ads, setAds] = useState([]);
     const [newRequest, setNewRequest] = useState(0);
+    const [isGetting, setIsGetting] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
 // ----------------------------------------------------------------------
@@ -33,7 +34,7 @@ export default function MyAds() {
         // Update post view - count only
         async function onLoad() {
             // Stop loading
-            setIsLoading(true);
+            setIsGetting(true);
 
             try {
                 // Check that we have not unmounted and default account is not null
@@ -89,7 +90,7 @@ export default function MyAds() {
             }
 
             // Stop loading
-            setIsLoading(false);
+            setIsGetting(false);
         }
 
         // Return the loaded function
@@ -111,6 +112,7 @@ export default function MyAds() {
     function handleTransfer(contractAddr, budget) {
         // Disable the submit button to avoid multiple requests
         setHasSubmitted(true);
+        setIsLoading(true);
 
         try {
             // Create a new contract
@@ -133,13 +135,15 @@ export default function MyAds() {
                     // rejects the transaction.
                     // 4001 : user rejected transaction error
                     if (error.code === 4001) {
-                        setHasSubmitted(false)
+                        setHasSubmitted(false);
+                        setIsLoading(false);
                     }
                 });
 
         } catch (e) {
             // Error Handling
             alert(e.message);
+            setIsLoading(false);
         }
     }
 
@@ -149,6 +153,7 @@ export default function MyAds() {
     function handleDestroy(contractAddr) {
         // Disable the submit button to avoid multiple requests
         setHasSubmitted(true);
+        setIsLoading(true);
 
         try {
             // Create a new contract
@@ -171,7 +176,8 @@ export default function MyAds() {
                     // rejects the transaction.
                     // 4001 : user rejected transaction error
                     if (error.code === 4001) {
-                        setHasSubmitted(false)
+                        setHasSubmitted(false);
+                        setIsLoading(false);
                     }
                 });
 
@@ -179,6 +185,7 @@ export default function MyAds() {
 
             // Error Handling
             alert(e.message);
+            setIsLoading(false);
         }
     }
 
@@ -186,7 +193,7 @@ export default function MyAds() {
     // Return UI
     return (
         <main className="App container-fluid" >
-            {!isLoading
+            {!isGetting
                 // When the page has finish loading --------------------- >
                 ? <>
                     {ads.length === 0
@@ -196,6 +203,7 @@ export default function MyAds() {
                         // When there are SmAC -------------------------- >
                         : <WithAds
                             ads={ads}
+                            isLoading={isLoading}
                             hasSubmitted={hasSubmitted}
                             setNewRequest={setNewRequest}
                             handleDestroy={handleDestroy}
@@ -217,7 +225,7 @@ export default function MyAds() {
 // ----------------------------------------------------------------------
 function WithAds(props) {
     // Important variables
-    const { ads, handleDestroy, handleTransfer, hasSubmitted, setNewRequest } = props;
+    const { ads, handleDestroy, handleTransfer, hasSubmitted, setNewRequest, isLoading } = props;
 
     // Return UI
     return (
@@ -299,6 +307,7 @@ function WithAds(props) {
                             reward={ad.reward}
                             created={ad.created}
                             expired={ad.expired}
+                            isLoading={isLoading}
                             claimers={ad.claimers}
                             promoter={ad.promoter}
                             reclaimPPeC={reclaimPPeC}

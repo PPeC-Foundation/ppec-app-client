@@ -1,5 +1,7 @@
 // React Required --------------------------------------
 import React, { Fragment, useState } from 'react';
+// Components ------------------------------------------
+import LoaderButton from "./LoaderButton";
 // Libs ------------------------------------------------
 // usaAppContext stores - App.js - variables for the entire application
 import { useAppContext } from "../libs/contextLib";
@@ -9,12 +11,15 @@ import { useAppContext } from "../libs/contextLib";
 // we use "myads" ----> "U|SmAC"
 // -------------- Application Begins Bellow ------------ //
 
+// ----------------------------------------------------------------------
 // Main Component
 // Displays more information about each SmAC
+// ----------------------------------------------------------------------
 export default function Modal(props) {
     // Important variables
     const { commify, ethers, signer, abiSmaC, founder, defaultAccount } = useAppContext();
     const [hasReported, setHasReported] = useState(false);
+    const [isReporting, setIsReporting] = useState(false);
     const {
         id,
         link,
@@ -29,9 +34,12 @@ export default function Modal(props) {
         expired,
         claimers,
         promoter,
-        scamReport,
-        hasClaimed,
+        isLoading,
         canReport,
+        hasClaimed,
+        isClaiming,
+        scamReport,
+        isCleaning,
         reclaimPPeC,
         handleClaim,
         hasSubmitted,
@@ -58,6 +66,7 @@ export default function Modal(props) {
     function handleScamReport(contractAddr) {
         // Disable the submit button to avoid multiple requests
         setHasReported(true);
+        setIsReporting(true);
 
         try {
             // Create a new contract
@@ -78,13 +87,15 @@ export default function Modal(props) {
                     // Set submitted to false if the user 
                     // rejects the transaction.
                     if (error.code === 4001) {
-                        setHasReported(false)
+                        setHasReported(false);
+                        setIsReporting(false);
                     }
                 });
 
         } catch (e) {
             // Error Handling
             alert(e.message);
+            setIsReporting(false);
         }
     }
 
@@ -135,7 +146,7 @@ export default function Modal(props) {
                             rel="noopener noreferrer"
                             className={`btn btn-warning mb-3 w-100 border border-secondary shadow-sm ${button === "bounty" || button === "ads" || button === "digest" ? "" : "d-none"} `}
                         >
-                            <i className="fas fa-info-circle"></i>
+                            <i className="fa fa-exclamation-triangle"></i>
                             <b> Check link safety on Google </b>
                         </a>
 
@@ -197,6 +208,7 @@ export default function Modal(props) {
                             // Display button
                             ? <ButtonBounty
                                 claim={claim}
+                                isCleaning={isCleaning}
                                 handle={handleClaimBounty}
                                 contractAddr={contractAddr}
                                 hasSubmitted={hasSubmitted}
@@ -213,12 +225,13 @@ export default function Modal(props) {
                         {button === "ads"
                             // Display button
                             ? <ButtonAds
-                                claim={claim}
                                 link={link}
+                                claim={claim}
                                 closed={closed}
                                 handle={handleClaim}
                                 hasExpired={hasExpired}
                                 hasClaimed={hasClaimed}
+                                isClaiming={isClaiming}
                                 reclaimPPeC={reclaimPPeC}
                                 hasReported={hasReported}
                                 contractAddr={contractAddr}
@@ -242,6 +255,7 @@ export default function Modal(props) {
                                 claim={claim}
                                 closed={closed}
                                 budget={budget}
+                                isLoading={isLoading}
                                 reclaimPPeC={reclaimPPeC}
                                 contractAddr={contractAddr}
                                 hasSubmitted={hasSubmitted}
@@ -264,6 +278,7 @@ export default function Modal(props) {
                             // Display button
                             ? <ButtonReportScam
                                 hasClaimed={hasClaimed}
+                                isReporting={isReporting}
                                 hasReported={hasReported}
                                 contractAddr={contractAddr}
                                 handleScamReport={handleScamReport}
@@ -314,11 +329,12 @@ function Tab(props) {
 // ----------------------------------------------------------------------
 function ButtonAds(props) {
     // Important variables
-    const { balance, minBalance, buyPPeCLink, commify} = useAppContext();
+    const { balance, minBalance, buyPPeCLink, commify, registered } = useAppContext();
     const {
         link,
         claim,
-        handle,        
+        handle,
+        isClaiming,
         hasClaimed,
         hasReported,
         hasSubmitted,
@@ -329,7 +345,9 @@ function ButtonAds(props) {
     return (
         <Fragment>
             {Number(balance) < Number(minBalance)
+                // ----------------------------------------------------------------------------------
                 // Display when address has less token than minBalance required
+                // ----------------------------------------------------------------------------------
                 ? <a
                     href={buyPPeCLink}
                     target="_blank"
@@ -341,32 +359,40 @@ function ButtonAds(props) {
                     <strong> TO CLAIM </strong>
                 </a>
 
+                // ----------------------------------------------------------------------------------
                 // Display when address has the minBalance required
+                // ----------------------------------------------------------------------------------
                 : <div>
                     {hasClaimed === true
+                        // --------------------------------------------------------------------------
                         // After reward is claimed
+                        // --------------------------------------------------------------------------
                         ? <div className="btn alert-primary rounded border border-primary disabled">
                             <b> CLAIMED </b>
                         </div>
 
+                        // --------------------------------------------------------------------------
                         // Before reward is claimed
-                        : <button
+                        // --------------------------------------------------------------------------
+                        : <LoaderButton
                             type="button"
-                            disabled={null}
+                            isLoading={isClaiming}
                             onClick={() => handle(contractAddr, link)}
-                            className={`btn btn-primary border border-dark ${hasSubmitted || hasReported ? "disabled" : null}`}
+                            className={`btn btn-primary border border-dark ${hasSubmitted || hasReported || !registered ? "disabled" : null}`}
                         >
-                            <strong>
+                            {/* Title */}
+                            <span>
                                 {hasSubmitted
-                                    ? <span>
-                                        <small> <i className="spinner-border text-light spinner-border-sm"></i> </small>
-                                        <strong> CLAIMING </strong>
-                                    </span>
-                                    : <strong> CLAIM </strong>
+                                    ? <strong> CLAIMING </strong>
+                                    : <strong> {registered === false ? "Initialize Address to Claim" : "CLAIM"} </strong>
                                 }
-                                <span className="badge border border-info shadow"> {commify(claim)} PPeC </span>
-                            </strong>
-                        </button>
+                            </span>
+
+                            {/* Reward */}
+                            <span className={`badge border border-info shadow ${registered === false ? "d-none" : ""}`}>
+                                {commify(claim)} PPeC
+                            </span>
+                        </LoaderButton>
                     }
                 </div>
             }
@@ -384,7 +410,8 @@ function ButtonBounty(props) {
     const { balance, minBalance, buyPPeCLink, commify } = useAppContext();
     const {
         claim,
-        handle,        
+        handle,
+        isCleaning,
         contractAddr,
         hasSubmitted
     } = props;
@@ -406,23 +433,21 @@ function ButtonBounty(props) {
                 </a>
 
                 // Display when address as the minimum token balance required
-                : <button
+                : <LoaderButton
                     type="button"
+                    isLoading={isCleaning}
                     onClick={() => handle(contractAddr)}
                     className={`btn btn-primary border border-dark ${hasSubmitted ? "disabled" : null}`}
                 >
                     {/* Action */}
                     {hasSubmitted
-                        ? <span>
-                            <small> <i className="spinner-border text-light spinner-border-sm"></i> </small>
-                            <strong> CLAIMING </strong>
-                        </span>
+                        ? <strong> CLAIMING </strong>
 
                         : <strong> CLAIM </strong>
                     }
                     <strong className="badge border border-info shadow"> {commify(claim)} PPeC </strong>
 
-                </button>
+                </LoaderButton>
             }
         
         </Fragment>
@@ -439,7 +464,8 @@ function ButtonReportScam(props) {
     // Important variables
     const { balance, minBalance } = useAppContext();
     const {
-        hasClaimed, 
+        hasClaimed,
+        isReporting,
         hasReported,
         contractAddr,
         handleScamReport
@@ -452,12 +478,13 @@ function ButtonReportScam(props) {
                 // Display when address has less token than minBalance required
                 ? null
 
-                : <button
+                : <LoaderButton
+                    isLoading={isReporting}
                     onClick={() => handleScamReport(contractAddr)}
                     className={`btn btn-warning border border-dark ${hasClaimed || hasReported ? "disabled" : null}`}
                 >
                     <strong> Report Scam </strong>
-                </button>
+                </LoaderButton>
             }            
         </Fragment>
         );
@@ -475,6 +502,7 @@ function ButtonMyAds(props) {
         claim,
         closed,
         budget,
+        isLoading,
         reclaimPPeC,
         hasSubmitted,
         contractAddr,
@@ -492,50 +520,73 @@ function ButtonMyAds(props) {
         <Fragment>
             {/* When the smart ad is funded */}
             {isFundedRunning
+                // --------------------------------------------------------------------------
+                // A button is returned
+                // --------------------------------------------------------------------------
                 ? <div className="btn alert-primary rounded border border-primary disabled">
                     <b> FUNDED </b>
                 </div>
+
+                // --------------------------------------------------------------------------
+                // No button is returned
+                // --------------------------------------------------------------------------
                 : null
             }
 
             {/* When the smart ad was closed by the promoter */}
             {closed
+                // --------------------------------------------------------------------------
+                // A button is returned
+                // --------------------------------------------------------------------------
                 ? <div className="btn alert-dark rounded border border-dark disabled">
                     <span></span>
                     <b> FINISHED </b>
                 </div>
+
+                // --------------------------------------------------------------------------
+                // No button is returned
+                // --------------------------------------------------------------------------
                 : null
             }
 
             {/* When the smart ad is not funded */}
             {notFundedRunning
-                ? <button
+                // --------------------------------------------------------------------------
+                // A button is returned
+                // --------------------------------------------------------------------------
+                ? <LoaderButton
                     type="submit"
+                    isLoading={isLoading}
                     onClick={() => handleTransfer(contractAddr, claim, modalId)}
                     className={`btn btn-primary border border-dark ${hasSubmitted ? "disabled" : null}`}
                 >
-                    <span></span>
                     <b>                       
                         
                         {/* Action */}
                         {hasSubmitted
-                            ? <span>
-                                <small> <i className="spinner-border text-light spinner-border-sm"></i> </small>
-                                <strong> FUNDING </strong>
-                            </span>
+                            ? <strong> FUNDING </strong>
                             : <strong> FUND </strong>
                         }
                         {/* Amount */}
                         <strong className="badge border border-info shadow"> {commify(claim)} PPeC </strong>
                     </b>
-                </button>
+                </LoaderButton>
+
+                // --------------------------------------------------------------------------
+                // No button is returned
+                // --------------------------------------------------------------------------
                 : null
             }
 
             {/* When the smart ad has expired and waiting for promoter to reclaim funds */}
             {reclaimPPeC || unpledgePPeC
-                ? <button
+
+                // --------------------------------------------------------------------------
+                // A button is returned
+                // --------------------------------------------------------------------------
+                ? <LoaderButton
                     type="submit"
+                    isLoading={isLoading}
                     onClick={() => handleDestroy(contractAddr, claim)}
                     className={`btn btn-primary border border-dark ${hasSubmitted ? "disabled" : null}`}
                 >
@@ -557,6 +608,10 @@ function ButtonMyAds(props) {
 
                         {/* Display for unpledge */}
                         {unpledgePPeC
+
+                            // ----------------------------------------------------------------
+                            // A button is returned
+                            // ----------------------------------------------------------------
                             ? <span>
                                 {hasSubmitted
                                     ? <span>
@@ -567,10 +622,18 @@ function ButtonMyAds(props) {
                                 }
                                 <span className="badge border border-info shadow"> {commify(budget)} PPeC </span>
                             </span>
+
+                            // ----------------------------------------------------------------
+                            // No button is returned
+                            // ----------------------------------------------------------------
                             : null
                         }
                     </b>
-                </button>
+                </LoaderButton>
+
+                // --------------------------------------------------------------------------
+                // No button is returned
+                // --------------------------------------------------------------------------
                 : null
             }
 

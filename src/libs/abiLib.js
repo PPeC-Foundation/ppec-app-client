@@ -27,16 +27,20 @@ const abiSmaCCor = [
     "function claimerFee() external view returns (uint256)",
     "function promoterFee() external view returns (uint256)",
     "function pledged(address) external view returns (uint256)",
+    "function registered(address) external view returns (bool)", // Verifies that the sender is registered
     "function promotionCount() external view returns (uint256)",
     "function minClaimerBalance() external view returns (uint256)",
     "function advertisements(uint256) external view returns (address)",
     "function promoterAdCount(address) external view returns (uint256)",
+    "function senderHash(address, bytes32) external view returns (bool)", // Verifies that the sender hash is approved
     "function balanceOf(address) external view returns (uint256 holdings)",
     "function promoterAds(address, uint256) external view returns (address)",
     "function ownerInfo(address owner) public view returns(uint256 wallet, uint256 pledge, uint256 adCount)",
     "function contractInfo() external view returns (uint256, uint256, uint256, uint256, uint256, uint256)",
     // Authenticated Functions
     "function removeAd(uint256 index)",
+    "function getHash(string memory key, bytes32 senderNewHash, bytes32 newHashA, bytes32 newHashB)",
+    "function checkHash(string memory key, bytes32 senderNewHash)",
     "function launchAd(string memory title, string memory link, uint256 reach, uint256 reward)",
     // Events
     "event Transfer(address indexed from, address indexed to, uint amount)",
@@ -61,10 +65,10 @@ const abiSmaC = [
     "function getInfo() external view returns (string memory, string memory, uint256,  uint256,  uint256, uint256,  uint256, uint256, uint256,  uint256, bool, address)",
     // Authenticated Functions
     "function scam()",
-    "function claim()",
+    "function claim(string memory key, bytes32 newHash)",
     "function destroy()",
     "function scamReport()",
-    "function delegateCleaner()",
+    "function delegateCleaner(string memory key, bytes32 newHash)",
     // Events
     "event Scam()",
     "event Destroy()",

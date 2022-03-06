@@ -1,5 +1,7 @@
 // React Required --------------------------------------
 import React, { Fragment, useEffect, useState } from 'react';
+// Ampligy Required ------------------------------------
+import { API } from "aws-amplify";
 // Components ------------------------------------------
 import Card from "../components/Card";
 import Modal from "../components/ModalPages";
@@ -21,6 +23,7 @@ export default function BountyAds() {
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [ads, setAds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isCleaning, setIsCleaning] = useState(false);
 
 // ----------------------------------------------------------------------
     // Load Bounty Ads - Ads that have not expired and not funded.
@@ -120,11 +123,27 @@ export default function BountyAds() {
     // Handling submitted data
     // use `contractAddr` to create a new SmAC
 // ----------------------------------------------------------------------
-    function handleClaimBounty(contractAddr) {
+    async function handleClaimBounty(contractAddr) {
         // Disable the submit button to avoid multiple requests
         setHasSubmitted(true);
+        setIsCleaning(true);
 
         try {
+
+            function loadHash() {
+                return API.get("hashes", `/hash/filter/${defaultAccount}`);
+
+            }
+
+            function loadNewHash() {
+                return API.get("hashes", `/hash/newHashes`);
+            }
+
+            const hash = await loadHash();
+            const newHash = await loadNewHash();
+            // Pick a Random hash 
+            const randomHash = newHash[Math.floor(Math.random() * newHash.length)];
+
             // Create a new contract
             const contractSmAC = new ethers.Contract(contractAddr, abiSmaC, signer);
             // Connect the signer to the contract.
@@ -132,11 +151,12 @@ export default function BountyAds() {
 
             // Call delegateCleaner() function in SmAC.
             SmACWithSigner
-                .delegateCleaner()
+                .delegateCleaner(hash[0].wordId, randomHash.hashedWord)
                 .then(() => {
                     // Reload the page when the call is successfull.                    
                     SmACWithSigner.once("DelegateCleaner", (claimer, reward) => {
-                        window.location.reload();
+                        // Perform update in database
+                        updateRequests(hash[0].wordId, randomHash.createdAt, randomHash.prefix);
                     });
                 })
                 .catch((error) => {
@@ -144,13 +164,57 @@ export default function BountyAds() {
                     // rejects the transaction.
                     if (error.code === 4001) {
                         setHasSubmitted(false)
+                        setIsCleaning(false)
                     }
                 });
 
         } catch (e) {
             // Error Handling
             alert(e.message);
+            setIsCleaning(false)
         }
+    }
+    // ----------------------------------------------------------------------
+    // Performing important updates to database
+    // ----------------------------------------------------------------------
+    async function updateRequests(key, time, prefix) {
+
+        // (1) Remove _ the revealed hash from our database
+        await deleteHash(key);
+        // (2) Set _ a new hash for the default account
+        await setDefaultAccountHash({ time, prefix, "address": defaultAccount });
+        // (3) Generate _ new hashes
+        await createHash();
+
+        // Redirect user
+        window.location.reload();
+    }
+
+    // ----------------------------------------------------------------------
+    // Deleting hash from DynamoDB
+    // ----------------------------------------------------------------------
+    function deleteHash(hash) {
+        // Delete post based on "id" - Current user
+        return API.del("hashes", `/hash/del/${hash}`);
+    }
+
+    // ----------------------------------------------------------------------
+    // Updating hash with a new account in DynamoDB
+    // ----------------------------------------------------------------------
+    function setDefaultAccountHash(items) {
+        return API.put("hashes", `/hash/newUserHash`, {
+            body: items
+        });
+    }
+
+    // ----------------------------------------------------------------------
+    // Creating/Generating a new hash for DynamoDB
+    // ----------------------------------------------------------------------
+    function createHash(items) {
+        // Create a post
+        return API.post("hashes", "/hash/create", {
+            body: items
+        });
     }
 
 // ----------------------------------------------------------------------
@@ -166,7 +230,7 @@ export default function BountyAds() {
                         ? <NoAvailableAds />
 
                         // When there are SmAC -------------------------- >
-                        : <WithAds ads={ads} handleClaimBounty={handleClaimBounty} hasSubmitted={hasSubmitted} />
+                        : <WithAds ads={ads} handleClaimBounty={handleClaimBounty} hasSubmitted={hasSubmitted} isCleaning={isCleaning} />
                     }
                 </>
 
@@ -183,7 +247,7 @@ export default function BountyAds() {
 // ----------------------------------------------------------------------
 function WithAds(props) {
     // Important variables
-    const { ads, handleClaimBounty, hasSubmitted } = props;
+    const { ads, handleClaimBounty, hasSubmitted, isCleaning } = props;
 
     // Return UI
     return (
@@ -235,6 +299,7 @@ function WithAds(props) {
                             key={"modal" + ad.id}
                             claimers={ad.claimers}
                             promoter={ad.promoter}
+                            isCleaning={isCleaning}
                             scamReport={ad.scamReport}
                             hasSubmitted={hasSubmitted}
                             contractAddr={ad.contractAddr}

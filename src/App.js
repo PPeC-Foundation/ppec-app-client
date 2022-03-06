@@ -1,11 +1,14 @@
 // React Required --------------------------------------
 import React, { useEffect, useState } from 'react';
+// Ampligy Required ------------------------------------
+import { API } from "aws-amplify";
 // ethers Required -------------------------------------
 import { ethers } from "ethers";
 // Components ------------------------------------------
 import { Navigation } from "./components/Navigation";
 import Footer from "./components/Footer";
 import Modal from "./components/ModalPromote";
+import ModalAccount from "./components/ModalAccount";
 import Router from "./Router";
 // Libs ------------------------------------------------
 // usaAppContext stores - App.js - variables for the entire application
@@ -34,10 +37,13 @@ export default function App() {
     const [claimerFee, setClaimerFee] = useState(0);
     const [minReward, setMinReward] = useState(0);
     const [founder, setFounder] = useState(null);
+    const [accountHash, setAccountHash] = useState(false);
+    const [approvedHash, setApprovedHash] = useState(false);
     const [pledged, setPledged] = useState(0);
     const [adCount, setAdCount] = useState(0);
     const [balance, setBalance] = useState(0);
     const [chainId, setChainId] = useState(0);
+    const [registered, setRegistered] = useState(false);
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [needMetaMask, setNeedMetaMask] = useState(false);
@@ -62,8 +68,8 @@ export default function App() {
     // SmACCor : Smart Ads Contract Creator
     // PPeC : Paid Per Click [ERC20] Token
     // SmAC : Smart Ads Contract (multiple addresses)
-    // ----------------------------------------------------------------------
-    const addressPPeC = process.env.REACT_APP_PPEC_ADDRESS;
+    // ---------------------------------------------------------------------- 
+    const addressPPeC = process.env.REACT_APP_PPEC_ADDRESS; 
     const addressSmACCor = process.env.REACT_APP_SMACCOR_ADDRESS;
 
     // ----------------------------------------------------------------------
@@ -89,19 +95,7 @@ export default function App() {
             })
             .catch((err) => {
                 console.error(`Error fetching chainId: ${err.code}: ${err.message}`);
-            });
-
-        // --------------------------------------------------------------
-        // //Request an ethereum account
-        // --------------------------------------------------------------        
-        ethereum
-            .request({
-                method: "eth_requestAccounts"
-            })
-            .then(handleAccountsChanged)
-            .catch((err) => {
-                console.error(err);
-            });
+            });       
 
         // --------------------------------------------------------------        
         // Listen to account changes
@@ -128,6 +122,21 @@ export default function App() {
     }
 
     // ----------------------------------------------------------------------
+    // //Request an ethereum account 1800000000000000000000000
+    // ---------------------------------------------------------------------- 
+    if (window.ethereum.isConnected()) {
+
+        ethereum
+            .request({
+                method: "eth_requestAccounts"
+            })
+            .then(handleAccountsChanged)
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+ 
+    // ----------------------------------------------------------------------
     // Connecting to metamask using a button
     // ----------------------------------------------------------------------
     function connectWalletHandler() {
@@ -145,33 +154,45 @@ export default function App() {
 
     // ----------------------------------------------------------------------
     // Get Contract information
+    // We are returning information based on the user connection
+    // (1) if the user is connected to MetaMask, we use Web3 Connection
+    //     - We need the signer to send calls for the Smart Ads Contract Creator (SmACCor)
+    //     - (Read and Write)
+    // (2) if the user is not connected to MetaMask, we use RPC Connection
+    //     - We do not need the signer to send calls. We only need the provider to return views
+    //     - (Read Only)
     // ----------------------------------------------------------------------
     useEffect(() => {
         // Get contract information on load
         async function onLoad() {
             try {
 
-                // When metamask is installed and connected / Web3 connection
+                // (1) using Web3 connection
+                // When metamask is installed and connected 
+                // Getting the current account/signer information
                 if (typeof window.ethereum !== 'undefined' && chainId === providerId) {
+
                     // MetaMask Connection
                     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
                     // Get the signer
                     const signer = provider.getSigner();
+                    // Used for user balance.
                     const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
+                    // Set the contract for Smart Contract Creator 
                     const contractSmACCor = new ethers.Contract(addressSmACCor, abiSmaCCor, provider);
 
                     // Set variables
-                    setProvider(provider);
                     setSigner(signer);
+                    setProvider(provider);
                     setContractPPeC(contractPPeC);
                     setContractSmACCor(contractSmACCor);
 
-                    // Get the smaccor information
-                    getSmACCor(contractSmACCor);
-                    console.log("In installed ")
-
+                    // Get the smart contract creator information
+                    getSmACCor(contractSmACCor); 
                 }
-                // When metamask is not installed / RPC connection
+                // (2) using RPC connection
+                // When metamask is not installed
+                // Return the provider information
                 else {
                     const provider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_RPC);
                     const contractPPeC = new ethers.Contract(addressPPeC, abiPPeC, provider);
@@ -182,13 +203,11 @@ export default function App() {
                     setContractPPeC(contractPPeC);
                     setContractSmACCor(contractSmACCor);
 
-                    // Get the smaccor information
+                    // Get the smart contract creator (SmACCor) information
                     getSmACCor(contractSmACCor);
-                    console.log("In not installed ")
-                    
                 }
 
-                // Get smaccor information
+                // Retrieve the smart contract creator (SmACCor) information
                 async function getSmACCor(contractSmACCor) {
 
                     if (contractSmACCor !== null) {
@@ -210,7 +229,6 @@ export default function App() {
                     }
                 }
 
-
             } catch (e) {
                 // Error Handling
                 alert(e);
@@ -220,7 +238,7 @@ export default function App() {
         // Returning function when the screen finish loading
         onLoad();
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chainId]);
 
     // ----------------------------------------------------------------------
@@ -232,16 +250,29 @@ export default function App() {
             try {
                 // Checking MetaMask connection on each render
                 if (window.ethereum && defaultAccount != null && chainId === providerId) {
-                    setConnected(true)
+                    setConnected(true);
+                    // Get the account approved hash
+                    function loadHash() {
+                        return API.get("hashes", `/hash/filterhash/${defaultAccount}`);
+                    }
+                    const hash = await loadHash();
+                    const accountHash = (hash.length === 0 ? false : hash[0].hashedWord)
+
                     // Default Account Information
-                    let founder = await contractSmACCor.founder();
-                    let owner = await contractSmACCor.ownerInfo(defaultAccount);
-                    let balance = ethers.utils.formatUnits(owner[0], 18); // PPeC balance
-                    let pledged = ethers.utils.formatUnits(owner[1], 18); // PPeC pledged balance
+                    const approvedHash = (hash.length === 0 ? false : await contractSmACCor.senderHash(defaultAccount, hash[0].hashedWord));
+                    const founder = await contractSmACCor.founder();
+                    const registered = await contractSmACCor.registered(defaultAccount);
+                    const owner = await contractSmACCor.ownerInfo(defaultAccount);
+                    const balance = ethers.utils.formatUnits(owner[0], 18); // PPeC balance
+                    const pledged = ethers.utils.formatUnits(owner[1], 18); // PPeC pledged balance
+
                     // Setter for Default Account
                     setPledged(pledged);
                     setBalance(balance);
                     setFounder(founder);
+                    setRegistered(registered);
+                    setAccountHash(accountHash);
+                    setApprovedHash(approvedHash);
                 }
 
             } catch (e) {
@@ -292,6 +323,10 @@ export default function App() {
         return ethers.utils.commify(number)
     }
 
+    function decimal(number) {
+        return Number(number).toLocaleString('en-IN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    }
+
     // ----------------------------------------------------------------------
     // Return UI
     return (
@@ -308,21 +343,25 @@ export default function App() {
                 abiSmaC,
                 balance,
                 pledged,
+                decimal,
                 provider,
                 minReward,
                 connected,
-                claimPPeCDocs,
                 minBalance,
                 claimerFee,
+                registered,
                 promoterFee,
-                promotePPeCDocs,
                 buyPPeCLink,
                 getPPeCDocs,
+                accountHash,
+                approvedHash,
                 contractPPeC,
                 documentPPeC,
                 needMetaMask,
+                claimPPeCDocs,
                 chartPPeCLink,
                 defaultAccount,
+                promotePPeCDocs,
                 treasuryBalance,
                 contractSmACCor,
                 howToGetPPeCLink,
@@ -339,8 +378,9 @@ export default function App() {
             {/* Route Component */}
             <Router />
 
-            {/* Modal Component */}
+            {/* Modal Components */}
             <Modal />
+            <ModalAccount />
 
             {/* Footer Component */}
             <Footer />

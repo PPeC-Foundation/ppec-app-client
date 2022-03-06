@@ -84,32 +84,62 @@ function NavBar(props) {
                         {/* Connect Button, Address Button*/}
                         <div className="col-12 col-md">
                             {needMetaMask
+                                //-----------------------------------------------------------------------------------
                                 // When the user needs to install MetaMask
+                                //-----------------------------------------------------------------------------------
                                 ? <button
                                     type="button"
                                     className="btn disabled btn-danger border border-dark btn-primary w-100"
                                     >
                                         <strong> Get MetaMask </strong>
 
-                                    </button>
+                                </button>
 
-                                // When the user has MetaMask installed
-                                : <div className="btn-group w-100">
-                                    {/* Connect Button */}
-                                    <button
-                                        type="button"
-                                        onClick={connectWalletHandler}
-                                        className={`btn ${connected ? "disabled btn-dark border-dark" : "btn-primary"}`}
-                                    >
-                                        <strong> {connected ? "Connected" : "Connect"} </strong>
+                                //-----------------------------------------------------------------------------------
+                                // When the user has MetaMask
+                                //-----------------------------------------------------------------------------------
+                                : connected
 
-                                    </button>
+                                    //-------------------------------------------------------------------------------
+                                    // When the user is connected
+                                    //-------------------------------------------------------------------------------
+                                    ? <div className="btn-group w-100">
+                                        {/* Connect Button */}
+                                        <button
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#accountInformation"
+                                            className={`btn btn-dark border-dark text-warning shadow-sm`}
+                                        >
+                                            <strong>  Connected  </strong>
 
-                                    {/* Address Button */}
-                                    <button type="button" className="btn alert-dark border border-dark disabled">
-                                        <b> {first5Digits}...{last3Digits} </b>
-                                    </button>
-                                </div>
+                                        </button>
+
+                                        {/* Address Button */}
+                                        <button type="button" className="btn alert-dark border border-dark disabled">
+                                            <b> {first5Digits}...{last3Digits} </b>
+                                        </button>
+                                    </div>
+
+                                    //-------------------------------------------------------------------------------
+                                    // When the user is not connected
+                                    //-------------------------------------------------------------------------------
+                                    : <div className="btn-group w-100">
+                                        {/* Connect Button */}
+                                        <button
+                                            type="button"
+                                            onClick={connectWalletHandler}
+                                            className={`btn btn-primary`}
+                                        >
+                                            <strong>  Connect </strong>
+
+                                        </button>
+
+                                        {/* Address Button */}
+                                        <button type="button" className="btn alert-dark border border-dark disabled">
+                                            <b> {first5Digits}...{last3Digits} </b>
+                                        </button>
+                                    </div>
                             }                                    
                             
                         </div>
@@ -129,7 +159,7 @@ function InfoBar(props) {
     const {
         pledged,
         balance,
-        commify,
+        decimal,
         adCount,
         minReward,
         minBalance,
@@ -143,9 +173,9 @@ function InfoBar(props) {
             <div className="col-12 col-lg-8">
                 <div className="row">
                     <ListItem title="Total SmAC" value={adCount} />
-                    <ListItem title="Treasury Balance" value={commify(treasuryBalance) } />
-                    <ListItem title="Min. Reward" value={commify(minReward) } />
-                    <ListItem title="Min. Balance" value={commify(minBalance) } />
+                    <ListItem title="Treasury Balance" value={decimal(treasuryBalance)} />
+                    <ListItem title="Min. Reward" value={decimal(minReward)} />
+                    <ListItem title="Min. Balance" value={decimal(minBalance)} />
                 </div>
             </div>
 
@@ -157,7 +187,7 @@ function InfoBar(props) {
                         <div className="list-group">
                             {/* value */}
                             <div className="list-group-item border-primary py-1">
-                                <span className="" > <b> {commify(balance)} </b> </span>
+                                <span className="" > <b> {decimal(balance)} </b> </span>
                             </div>
 
                             {/* button */}
@@ -180,7 +210,7 @@ function InfoBar(props) {
                         <div className="list-group h-100">
                             {/* value */}
                             <div className="list-group-item py-1 h-100">
-                                <span className="" > <b> {commify(pledged)} </b> </span>
+                                <span className="" > <b> {decimal(pledged)} </b> </span>
                             </div>
 
                             {/* title */}
