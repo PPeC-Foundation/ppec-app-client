@@ -122,19 +122,17 @@ export default function App() {
     }
 
     // ----------------------------------------------------------------------
-    // //Request an ethereum account 1800000000000000000000000
+    // //Request an ethereum account
     // ---------------------------------------------------------------------- 
-    if (window.ethereum.isConnected() === true) {
 
-        ethereum
-            .request({
-                method: "eth_requestAccounts"
-            })
-            .then(handleAccountsChanged)
-            .catch((err) => {
-                console.error(err);
-            });
-    }
+    ethereum
+        .request({
+            method: "eth_requestAccounts"
+        })
+        .then(handleAccountsChanged)
+        .catch((err) => {
+            console.error(err);
+        });
  
     // ----------------------------------------------------------------------
     // Connecting to metamask using a button
