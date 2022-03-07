@@ -34,6 +34,8 @@ export default function BountyAds() {
 
         // Load Bounty Ads
         async function onLoad() {
+            // Start Loading
+            setIsLoading(true);
 
             try {
                 // Check that we have not unmounted
@@ -129,40 +131,57 @@ export default function BountyAds() {
         setIsCleaning(true);
 
         try {
-
+            // ------------------------------------------------------
+            // Get the account key word to verify with its approved hash
+            // ------------------------------------------------------
             function loadHash() {
                 return API.get("hashes", `/hash/filter/${defaultAccount}`);
-
             }
 
+            // Get the list of all defaultAccount hashes
+            const hash = await loadHash();
+
+            // sort by created date
+            // return the latest created hash date in the first element "[0]"
+            const latestHash = hash.sort(function (a, b) {
+                return b.createdAt - a.createdAt;
+            });
+
+            // ------------------------------------------------------
+            // Get a new unapproved hash
+            // ------------------------------------------------------
             function loadNewHash() {
                 return API.get("hashes", `/hash/newHashes`);
             }
 
-            const hash = await loadHash();
+            // Return hashes
             const newHash = await loadNewHash();
             // Pick a Random hash 
             const randomHash = newHash[Math.floor(Math.random() * newHash.length)];
 
+            // ------------------------------------------------------
             // Create a new contract
+            // ------------------------------------------------------
             const contractSmAC = new ethers.Contract(contractAddr, abiSmaC, signer);
-            // Connect the signer to the contract.
+            // Connect the signer to the contract
             const SmACWithSigner = contractSmAC.connect(signer);
 
+            // ------------------------------------------------------
             // Call delegateCleaner() function in SmAC.
+            // ------------------------------------------------------
             SmACWithSigner
-                .delegateCleaner(hash[0].wordId, randomHash.hashedWord)
+                .delegateCleaner(latestHash[0].wordId, randomHash.hashedWord)
                 .then(() => {
                     // Reload the page when the call is successfull.                    
                     SmACWithSigner.once("DelegateCleaner", (claimer, reward) => {
                         // Perform update in database
-                        updateRequests(hash[0].wordId, randomHash.createdAt, randomHash.prefix);
+                        updateRequests(latestHash[0].wordId, randomHash.createdAt, randomHash.prefix);
                     });
                 })
                 .catch((error) => {
                     // Set submitted to false if the user 
                     // rejects the transaction.
-                    if (error.code === 4001) {
+                    if (error.code === 4001 || error.code === -32603) {
                         setHasSubmitted(false)
                         setIsCleaning(false)
                     }
@@ -230,7 +249,7 @@ export default function BountyAds() {
                         ? <NoAvailableAds />
 
                         // When there are SmAC -------------------------- >
-                        : <WithAds ads={ads} handleClaimBounty={handleClaimBounty} hasSubmitted={hasSubmitted} isCleaning={isCleaning} />
+                        : <AvailableAds ads={ads} handleClaimBounty={handleClaimBounty} hasSubmitted={hasSubmitted} isCleaning={isCleaning} />
                     }
                 </>
 
@@ -242,10 +261,10 @@ export default function BountyAds() {
 }
 
 // ----------------------------------------------------------------------
-// WithAds Component
+// AvailableAds Component
 // Return SmAC
 // ----------------------------------------------------------------------
-function WithAds(props) {
+function AvailableAds(props) {
     // Important variables
     const { ads, handleClaimBounty, hasSubmitted, isCleaning } = props;
 

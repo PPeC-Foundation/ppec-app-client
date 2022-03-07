@@ -17,7 +17,7 @@ import { useAppContext } from "../libs/contextLib";
 // ----------------------------------------------------------------------
 export default function Modal(props) {
     // Important variables
-    const { commify, ethers, signer, abiSmaC, founder, defaultAccount } = useAppContext();
+    const { decimal, ethers, signer, abiSmaC, founder, defaultAccount } = useAppContext();
     const [hasReported, setHasReported] = useState(false);
     const [isReporting, setIsReporting] = useState(false);
     const {
@@ -153,13 +153,13 @@ export default function Modal(props) {
                         {/* Reward, Coffer, Budget */}
                         <div className="row">                                
                             {/* Reward */}
-                            <Tab type={reward} title={`Reward PPeC`} commifyType={reward === false ? null : commify(reward)} />  
+                            <Tab type={reward} title={`Reward PPeC`} commifyType={reward === false ? null : decimal(reward)} />  
                             
                             {/* Coffer */}
-                            <Tab type={coffer} title={`Coffer PPeC`} commifyType={coffer === false ? null : commify(coffer)} />  
+                            <Tab type={coffer} title={`Coffer PPeC`} commifyType={coffer === false ? null : decimal(coffer)} />  
                             
                             {/* Budget */}
-                            <Tab type={budget} title={`Budget PPeC`} commifyType={budget === false ? null : commify(budget)} />                              
+                            <Tab type={budget} title={`Budget PPeC`} commifyType={budget === false ? null : decimal(budget)} />                              
                         </div>           
                         
                         {/* Claimers, Scam Report */}
@@ -329,7 +329,7 @@ function Tab(props) {
 // ----------------------------------------------------------------------
 function ButtonAds(props) {
     // Important variables
-    const { balance, minBalance, buyPPeCLink, commify, registered } = useAppContext();
+    const { balance, minBalance, buyPPeCLink, decimal, registered } = useAppContext();
     const {
         link,
         claim,
@@ -355,7 +355,7 @@ function ButtonAds(props) {
                     className={`btn btn-primary border border-dark`}
                 >
                     <strong> YOU NEED </strong>
-                    <strong className="badge border border-info shadow"> {commify(minBalance)} PPeC </strong>
+                    <strong className="badge border border-info shadow"> {decimal(minBalance)} PPeC </strong>
                     <strong> TO CLAIM </strong>
                 </a>
 
@@ -390,7 +390,7 @@ function ButtonAds(props) {
 
                             {/* Reward */}
                             <span className={`badge border border-info shadow ${registered === false ? "d-none" : ""}`}>
-                                {commify(claim)} PPeC
+                                {decimal(claim)} PPeC
                             </span>
                         </LoaderButton>
                     }
@@ -407,7 +407,7 @@ function ButtonAds(props) {
 // ----------------------------------------------------------------------
 function ButtonBounty(props) {
     // Important variables
-    const { balance, minBalance, buyPPeCLink, commify } = useAppContext();
+    const { balance, minBalance, buyPPeCLink, decimal } = useAppContext();
     const {
         claim,
         handle,
@@ -428,7 +428,7 @@ function ButtonBounty(props) {
                     className={`btn btn-primary border border-dark`}
                 >
                     <strong> YOU NEED </strong>
-                    <strong className="badge border border-info shadow"> {commify(minBalance)} PPeC </strong>
+                    <strong className="badge border border-info shadow"> {decimal(minBalance)} PPeC </strong>
                     <strong> TO CLAIM </strong>
                 </a>
 
@@ -445,7 +445,7 @@ function ButtonBounty(props) {
 
                         : <strong> CLAIM </strong>
                     }
-                    <strong className="badge border border-info shadow"> {commify(claim)} PPeC </strong>
+                    <strong className="badge border border-info shadow"> {decimal(claim)} PPeC </strong>
 
                 </LoaderButton>
             }
@@ -496,7 +496,7 @@ function ButtonReportScam(props) {
 // ----------------------------------------------------------------------
 function ButtonMyAds(props) {
     // Important variables
-    const { commify } = useAppContext();
+    const { decimal } = useAppContext();
     const {
         id,
         claim,
@@ -568,7 +568,7 @@ function ButtonMyAds(props) {
                             : <strong> FUND </strong>
                         }
                         {/* Amount */}
-                        <strong className="badge border border-info shadow"> {commify(claim)} PPeC </strong>
+                        <strong className="badge border border-info shadow"> {decimal(claim)} PPeC </strong>
                     </b>
                 </LoaderButton>
 
@@ -601,7 +601,7 @@ function ButtonMyAds(props) {
                                     </span>
                                     : <strong> RECLAIM </strong>
                                 }
-                                <span className="badge border border-info shadow"> {commify(claim)} PPeC </span>
+                                <span className="badge border border-info shadow"> {decimal(claim)} PPeC </span>
                             </span>
                             : null
                         }
@@ -620,7 +620,7 @@ function ButtonMyAds(props) {
                                     </span>
                                     : <strong> UNPLEDGE </strong>
                                 }
-                                <span className="badge border border-info shadow"> {commify(budget)} PPeC </span>
+                                <span className="badge border border-info shadow"> {decimal(budget)} PPeC </span>
                             </span>
 
                             // ----------------------------------------------------------------

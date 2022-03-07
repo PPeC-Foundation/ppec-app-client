@@ -20,7 +20,7 @@ export default function ModalPomote() {
     const {
         signer,
         ethers,
-        commify,
+        decimal,
         pledged,
         balance,
         minReward,
@@ -353,7 +353,7 @@ export default function ModalPomote() {
 
                                         {/* Info */}
                                         <small className={`${fields.reward >= Number(minReward) ? "text-success" : "text-danger"}`}>
-                                            Min. reward per click is {commify(minReward)}
+                                            Min. reward per click is {decimal(minReward)}
                                         </small>
                                     </div>
                                 </div>
@@ -371,7 +371,7 @@ export default function ModalPomote() {
                                     Your required budget and pledged amount cannot exceed your available PPeC balance.
                                     {budgetAndPledged > balance
                                         ? <span>
-                                            <span> Your are {commify(budgetAndPledged - balance)} PPeC short! </span>
+                                            <span> Your are {decimal(budgetAndPledged - balance)} PPeC short! </span>
                                             <a href={buyPPeCLink} target="_blank" rel="noopener noreferrer">
                                                 <b> GET MORE PPeC </b>
                                                 <i className="fas fa-external-link-alt"></i>
@@ -388,7 +388,7 @@ export default function ModalPomote() {
                                  * */}
                                 <div className="col-12 col-md-4">
                                     <div className="form-floating mb-3 mb-md-0">
-                                        <span className="form-control"> {commify(budget)} </span>
+                                        <span className="form-control"> {decimal(budget)} </span>
                                         <label htmlFor="budget"> Budget PPeC </label>
                                     </div>
                                 </div>
@@ -400,7 +400,7 @@ export default function ModalPomote() {
                                  * */}
                                 <div className="col col-md-4">
                                     <div className="form-floating">
-                                        <span className="form-control"> {commify(balance)} </span>
+                                        <span className="form-control"> {decimal(balance)} </span>
                                         <label htmlFor="balance"> Available PPeC </label>
                                     </div>
                                 </div>
@@ -412,7 +412,7 @@ export default function ModalPomote() {
                                  * */}
                                 <div className="col col-md-4">
                                     <div className="form-floating">
-                                        <span className="form-control"> {commify(pledged)} </span>
+                                        <span className="form-control"> {decimal(pledged)} </span>
                                         <label htmlFor="pledged"> Pledged PPeC </label>
                                     </div>
                                 </div>

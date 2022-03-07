@@ -304,7 +304,7 @@ function NavLink(props) {
 function AdsModalDetail() {
     // Important variables
     const {
-        commify,
+        decimal,
         adCount,
         minReward,
         claimerFee
@@ -329,7 +329,7 @@ function AdsModalDetail() {
                 {/* Minimum PPeC Required */}
                 <div className="col-12 col-md-12 mb-0 mb-md-3">
                     <div className="form-floating mb-3 mb-md-0">
-                        <span className="form-control">  <b>{commify(minReward)} </b> </span>
+                        <span className="form-control">  <b>{decimal(minReward)} </b> </span>
                         <label htmlFor="budget">  <b>Min. required $PPeC </b> </label>
                     </div>
                 </div>
@@ -360,7 +360,7 @@ function AdsModalDetail() {
 function MyAdsModalDetail() {
     // Important variables
     const {
-        commify,
+        decimal,
         minReward,
         promoterFee
     } = useAppContext();
@@ -386,7 +386,7 @@ function MyAdsModalDetail() {
                 {/* Minimum Reward required */}
                 <div className="col col-md-12 mb-0 mb-md-3">
                     <div className="form-floating mb-3 mb-md-0">
-                        <span className="form-control">  <b>{commify(minReward)} </b> </span>
+                        <span className="form-control">  <b>{decimal(minReward)} </b> </span>
                         <label htmlFor="budget">  <b>Minimum Reward required $PPeC </b> </label>
                     </div>
                 </div>
@@ -488,7 +488,7 @@ function BountyModalDetail() {
 function BuyModalDetail() {
     // Important variables
     const {
-        commify,
+        decimal,
         adCount,
         minReward,
         buyPPeCLink
@@ -559,7 +559,7 @@ function BuyModalDetail() {
                 {/* Budget amount */}
                 <div className="col-12 col-md-12 mb-0 mb-md-3">
                     <div className="form-floating mb-3 mb-md-0">
-                        <span className="form-control">  <b>{commify(minReward)} </b> </span>
+                        <span className="form-control">  <b>{decimal(minReward)} </b> </span>
                         <label htmlFor="budget">  <b>Minimum Reward required $PPeC </b> </label>
                     </div>
                 </div>
@@ -590,7 +590,7 @@ function BuyModalDetail() {
 function CycleModalDetail() {
     // Important variables
     const {
-        commify,
+        decimal,
         adCount,
         minReward,
     } = useAppContext();
@@ -613,7 +613,7 @@ function CycleModalDetail() {
                 {/* Budget amount */}
                 <div className="col-12 col-md-12 mb-0 mb-md-3">
                     <div className="form-floating mb-3 mb-md-0">
-                        <span className="form-control">  <b>{commify(minReward)} </b> </span>
+                        <span className="form-control">  <b>{decimal(minReward)} </b> </span>
                         <label htmlFor="budget">  <b>Min. required PPeC </b> </label>
                     </div>
                 </div>

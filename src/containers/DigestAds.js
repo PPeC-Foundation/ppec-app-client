@@ -17,7 +17,7 @@ import { useAppContext } from "../libs/contextLib";
 // Main Function - DigestAds
 export default function DigestAds() {
     // Important variables
-    const { ethers, defaultAccount, contractSmACCor, abiSmaC, provider } = useAppContext();
+    const { ethers, defaultAccount, contractSmACCor, abiSmaC, provider, chainId, providerId, signer } = useAppContext();
     const [ads, setAds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -30,6 +30,8 @@ export default function DigestAds() {
 
         // Load Digest Ads
         async function onLoad() {
+            // Start Loading
+            setIsLoading(true);
 
             try {
                 // Check that we have not unmounted
@@ -48,7 +50,8 @@ export default function DigestAds() {
                         // Set the ad contract address
                         const addressSmAC = ad.toString();
                         // Create a new contract
-                        const contractSub = new ethers.Contract(addressSmAC, abiSmaC, provider);
+                        // If the user is connect return new contract for signer else return new contract for provider
+                        const contractSub = new ethers.Contract(addressSmAC, abiSmaC, (defaultAccount != null && chainId === providerId ? signer : provider));
 
                         // Get contract information
                         let items = await contractSub.getInfo();

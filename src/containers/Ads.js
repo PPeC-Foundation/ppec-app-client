@@ -25,15 +25,18 @@ export default function Ads() {
     const [isClaiming, setIsClaiming] = useState(false);
     const [ads, setAds] = useState([]);
 
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     // Load All Ads - Ads that have not expired and have been funded.
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     useEffect(() => {
         // Cleanup variable
         let unmounted = false;
 
         // Load All Ads
         async function onLoad() {
+            // Start Loading
+            setIsLoading(true);
+
             try {
                 // Check that we have not unmounted
                 if (!unmounted && contractSmACCor != null) {
@@ -88,7 +91,7 @@ export default function Ads() {
                         let hasNotExpired = ((object.expired * 1000) > timeNow); // Check that the ad is running.
 
                         // Fitler for ads that are running, and have funds.
-                        if (hasEnoughReward && notPromoter && notClaimed && hasNotExpired ) {
+                        if (hasEnoughReward && notPromoter && notClaimed && hasNotExpired) {
                             ads.push(object);
                         }
                     };
@@ -101,7 +104,7 @@ export default function Ads() {
                 alert(e);
             }
 
-            // Stop loading
+            // Stop Loading
             setIsLoading(false);
         }
 
@@ -116,46 +119,63 @@ export default function Ads() {
 
     // Our clean up happens when we leave the page and the defaultAccount changes
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultAccount, chainId, contractSmACCor]);
+    }, [defaultAccount]);
 
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     // Claim smart ad reward
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     async function handleClaim(contractAddr, link) {
         // Disable the submit button to avoid multiple requests
         setHasSubmitted(true);
         setIsClaiming(true);
 
         try {
-
+            // ------------------------------------------------------
+            // Get the account key word to verify with its approved hash
+            // ------------------------------------------------------
             function loadHash() {
                 return API.get("hashes", `/hash/filter/${defaultAccount}`);
-
             }
 
+            // Get the list of all defaultAccount hashes
+            const hash = await loadHash();
+
+            // sort by created date
+            // return the latest created hash date in the first element "[0]"
+            const latestHash = hash.sort(function (a, b) {
+                return b.createdAt - a.createdAt;
+            });
+
+            // ------------------------------------------------------
+            // Get a new unapproved hash
+            // ------------------------------------------------------
             function loadNewHash() {
                 return API.get("hashes", `/hash/newHashes`);
             }
 
-            const hash = await loadHash();
+            // Return hashes
             const newHash = await loadNewHash();
             // Pick a Random hash 
             const randomHash = newHash[Math.floor(Math.random() * newHash.length)];
 
+            // ------------------------------------------------------
             // Create a new contract
+            // ------------------------------------------------------
             const contractSmAC = new ethers.Contract(contractAddr, abiSmaC, signer);
             // Connect the signer to the contract
             const SmACWithSigner = contractSmAC.connect(signer);
 
+            // ------------------------------------------------------
             // Call claim() function in SmAC
+            // ------------------------------------------------------
             SmACWithSigner
-                .claim(hash[0].wordId, randomHash.hashedWord)
+                .claim(latestHash[0].wordId, randomHash.hashedWord)
                 .then(() => {
                     // Redirect user to the promoter's page
                     // once the claim is successfull.
                     SmACWithSigner.once("Claim", (event) => {
                         // Perform update in database
-                        updateRequests(hash[0].wordId, randomHash.createdAt, randomHash.prefix, link);
+                        updateRequests(latestHash[0].wordId, randomHash.createdAt, randomHash.prefix, link);
                     });                    
                 })
                 .catch((error) => {

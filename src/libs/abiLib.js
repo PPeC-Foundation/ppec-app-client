@@ -40,9 +40,11 @@ const abiSmaCCor = [
     // Authenticated Functions
     "function removeAd(uint256 index)",
     "function getHash(string memory key, bytes32 senderNewHash, bytes32 newHashA, bytes32 newHashB)",
+    "function resetHash(string memory key, bytes32 senderNewHash, bytes32 newHashA, bytes32 newHashB)",
     "function checkHash(string memory key, bytes32 senderNewHash)",
     "function launchAd(string memory title, string memory link, uint256 reach, uint256 reward)",
     // Events
+    "event GetHash()",
     "event Transfer(address indexed from, address indexed to, uint amount)",
     "event LaunchAd(string link, string title, uint256 reach, uint256 reward, uint256 budget, uint256 indexed created, address indexed promoter, address indexed adsContract)",
     // Errors
@@ -51,7 +53,7 @@ const abiSmaCCor = [
     "error PledgeExceedBalance(uint256 pledged, uint256 balance)",
     "error RewardTooLow(uint256 reward, uint256 minReward)",
     "error IndexOutOfBound(uint256 index)",
-    "error NotDelegateContract()"
+    "error NotDelegateContract()",
 ];
 
 // ----------------------------------------------------------------------
@@ -80,7 +82,7 @@ const abiSmaC = [
     "error NotEnoughReward(uint256 reward, uint256 coffer)",
     "error PromotionRunning()",
     "error PromotionEnded()",
-    " error CannotClean()",
+    "error CannotClean()",
     "error Claimed()"
 ];
 

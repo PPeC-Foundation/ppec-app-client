@@ -60,16 +60,19 @@ export default function ModalAccount() {
             SmACCorWithSigner
                 .getHash(hash[0].wordId, hashes[0].hashedWord, hashes[1].hashedWord, hashes[2].hashedWord)
                 .then(() => {
-                    // Perform update in database
-                    updateRequests(
-                        hash[0].wordId,
-                        hashes[0].createdAt,
-                        hashes[0].prefix,
-                        hashes[1].createdAt,
-                        hashes[1].prefix,
-                        hashes[2].createdAt,
-                        hashes[2].prefix,
-                    );
+                    // Once the transfer is successfull.
+                    SmACCorWithSigner.once("GetHash", (event) => {
+                        // Perform update in database
+                        updateRequests(
+                            hash[0].wordId,
+                            hashes[0].createdAt,
+                            hashes[0].prefix,
+                            hashes[1].createdAt,
+                            hashes[1].prefix,
+                            hashes[2].createdAt,
+                            hashes[2].prefix,
+                        );
+                    });
                 })
                 .catch((error) => {
                     // Set submitted to false if the user 
@@ -92,6 +95,8 @@ export default function ModalAccount() {
 
     // ----------------------------------------------------------------------
     // Reinitialize account to claim rewards
+    // If there is a problem with the current hash, the user can reset for 
+    // a new hash.
     // ----------------------------------------------------------------------
     async function handleReinitialization() {
         // Start loading
@@ -129,16 +134,19 @@ export default function ModalAccount() {
             SmACCorWithSigner
                 .resetHash(hash[0].wordId, hashes[0].hashedWord, hashes[1].hashedWord, hashes[2].hashedWord)
                 .then(() => {
-                    // Perform update in database
-                    updateRequests(
-                        hash[0].wordId,
-                        hashes[0].createdAt,
-                        hashes[0].prefix,
-                        hashes[1].createdAt,
-                        hashes[1].prefix,
-                        hashes[2].createdAt,
-                        hashes[2].prefix,
-                    );
+                    // Once the transfer is successfull.
+                    SmACCorWithSigner.once("GetHash", (event) => {
+                        // Perform update in database
+                        updateRequests(
+                            hash[0].wordId,
+                            hashes[0].createdAt,
+                            hashes[0].prefix,
+                            hashes[1].createdAt,
+                            hashes[1].prefix,
+                            hashes[2].createdAt,
+                            hashes[2].prefix,
+                        );
+                    });
                 })
                 .catch((error) => {
                     // Set submitted to false if the user 
@@ -250,7 +258,7 @@ export default function ModalAccount() {
 
                     {/* Modal Body */}
                     <div className="modal-body pb-0">
-                        {/* Image failure Alert */}
+                        {/* Account status Alert */}
                         <div className={`alert border ${Number(balance) >= Number(minBalance) ? "" : "d-none"} ${approvedHash === true ? "alert-success border-success" : "alert-danger border-danger"}`}>
                             <small>
                                 <i className="fa fa-exclamation-triangle"></i>
@@ -349,12 +357,12 @@ export default function ModalAccount() {
                         {/* Modal Footer */}
                         <div className="modal-footer">
                                 {/* Button - Submit */}
-                                {approvedHash === true
+                                {approvedHash === true || (registered === true && Number(balance) >= Number(minBalance))
                                     ? <LoaderButton
                                         type="button"
                                         isLoading={isLoading}
-                                        onClick={() => handleReinitialization()}
-                                        className="btn btn-danger alert-danger border border-danger"
+                                    onClick={() => handleReinitialization()}
+                                    className={`btn btn-danger alert-danger border border-danger ${approvedHash ? "disabled" : ""}`}
                                     >
                                         {!isLoading
                                             // when not loading
@@ -370,7 +378,7 @@ export default function ModalAccount() {
                                         type="button"
                                         isLoading={isLoading}
                                         onClick={() => handleInitialization()}
-                                        className={`btn btn-primary border border-dark shadow-sm  ${registered === false && Number(balance) >= Number(minBalance) ? "" : "disabled"}`}
+                                        className={`btn btn-primary border border-dark shadow-sm ${registered === false && Number(balance) >= Number(minBalance) ? "" : "disabled"}`}
                                     >
                                         {!isLoading
                                             // when not loading
