@@ -182,15 +182,15 @@ export default function Modal(props) {
                             {/* Created */}
                             <div className={`col-6`}>
                                 <div className="form-floating">
-                                    <span className="form-control"> {createdAt} </span>
+                                    <span className="form-control" style={{ height: "auto" }}> {createdAt} </span>
                                     <label htmlFor="budget"> Created </label>
                                 </div>
                             </div>
 
                             {/* Expired */}
                             <div className="col-6">
-                                <div className="form-floating">
-                                    <span className="form-control"> {expiredAt} </span>
+                                <div className="form-floating"> 
+                                    <span className="form-control" style={{ height: "auto" }}> {expiredAt} </span>
                                     <label htmlFor="expired" className={`${hasExpired ? "text-danger" : null}`}> {hasExpired ? "Expired" : "Expiration"} </label>
                                 </div>
                             </div>
@@ -294,7 +294,7 @@ export default function Modal(props) {
                             className={`btn btn-danger border border-dark ${founder === defaultAccount ? "" : "d-none"} `}
                             data-bs-dismiss="modal"
                         >
-                            <span> Scam </span>
+                            <span> Report Scam </span>
                         </button>
 
                         <button type="button" className="btn btn-danger border border-dark" data-bs-dismiss="modal">Close</button>
@@ -316,7 +316,7 @@ function Tab(props) {
     return (
         <div className={`col ${type === false ? "d-none" : null}`}>
             <div className="form-floating mb-3">
-                <span className="form-control"> {commifyType} </span>
+                <span className="form-control" style={{ overflow : "auto" }}> {commifyType} </span>
                 <label htmlFor="budget"> { title } </label>
             </div>
         </div>
@@ -353,6 +353,7 @@ function ButtonAds(props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`btn btn-primary border border-dark`}
+                    style={{ fontSize : "14px" }}
                 >
                     <strong> YOU NEED </strong>
                     <strong className="badge border border-info shadow"> {decimal(minBalance)} PPeC </strong>
