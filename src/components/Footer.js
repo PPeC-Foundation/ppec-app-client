@@ -119,7 +119,7 @@ export default function Footer() {
             {/* Copyright */}
             <div className="row p-2 text-center border-top">
                 <div className="col mx-auto text-center">
-                    <p className="mb-0"> <b> { year } PPeC Foundation. </b> </p>
+                    <p className="mb-0"> <b> <i className="fa fa-copyright"></i> PPeC Foundation. {year} </b> </p>
                 </div>
             </div>
         </footer>
