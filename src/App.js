@@ -430,7 +430,7 @@ export default function App() {
             {/* Footer Component */}
             <Footer />
 
-            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} buyPPeCLink={buyPPeCLink} />
+            <Errors alertMetaMask={alertMetaMask} providerId={providerId} chainId={chainId} needMetaMask={needMetaMask} howToGetPPeCLink={howToGetPPeCLink} />
 
         </AppContext.Provider>
     ));
@@ -438,7 +438,7 @@ export default function App() {
 
 function Errors(props) {
     // Important variables
-    const { alertMetaMask, providerId, chainId, needMetaMask, buyPPeCLink } = props;
+    const { alertMetaMask, providerId, chainId, needMetaMask, howToGetPPeCLink } = props;
 
     // Return UI
     return (
@@ -458,7 +458,7 @@ function Errors(props) {
                     className="btn btn-danger border border-dark shadow-sm"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={buyPPeCLink}
+                    href={howToGetPPeCLink}
                 >
                     <i className="fa fa-file-text"></i>
                     <strong> Learn more </strong>
