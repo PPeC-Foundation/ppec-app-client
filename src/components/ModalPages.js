@@ -484,7 +484,7 @@ function ButtonReportScam(props) {
                     onClick={() => handleScamReport(contractAddr)}
                     className={`btn btn-warning border border-dark ${hasClaimed || hasReported ? "disabled" : null}`}
                 >
-                    <strong> Report Scam </strong>
+                    <strong> Report </strong>
                 </LoaderButton>
             }            
         </Fragment>
