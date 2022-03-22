@@ -55,6 +55,14 @@ export default function Footer() {
                         icon="fa fa-github"
                         link="https://github.com/PPeC-Foundation"
                     />
+
+                    {/* GitHub Page */}
+                    <Link
+                        title="Medium"
+                        extendCSSClass="btn-dark mb-2 w-100 border-0"
+                        icon="fa fa-medium"
+                        link="https://paidperclick.medium.com/"
+                    />
                 </div>
 
                 {/* NFTs Page Links */}
