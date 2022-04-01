@@ -59,9 +59,17 @@ export default function Footer() {
                     {/* GitHub Page */}
                     <Link
                         title="Medium"
-                        extendCSSClass="btn-dark mb-2 w-100 border-0"
+                        extendCSSClass="btn-dark mb-2 w-50 border-0"
                         icon="fa fa-medium"
                         link="https://paidperclick.medium.com/"
+                    />
+
+                    {/* GitHub Page */}
+                    <Link
+                        title="Youtube"
+                        extendCSSClass="btn-dark mb-2 w-50 border-0"
+                        icon="fa fa-youtube-play"
+                        link="https://www.youtube.com/channel/UC_hACIKej0DPhwOS5hTlrow"
                     />
                 </div>
 

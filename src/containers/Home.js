@@ -34,9 +34,9 @@ export default function Home() {
                         <h1 style={{ fontSize: "3rem", fontFamily: "'Russo One', sans-serif" }}> Decentralizing Advertisement with a <strong className=""> SmAC </strong> </h1>
                         <p className="text-dark" style={{ fontSize: "1.2rem" }}>
                             <strong> 
-                                <span> Explore a brand new way to advertise and get more traffic with </span>
+                                <span> The world's first self-sustaining ecosystem for marketing products. Powered by a strong community, driven by blockchain technology </span>
                                 <a
-                                    className=""
+                                    className="d-none"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     href="https://paidperclick.gitbook.io/ppec-docs/guides/smac"
