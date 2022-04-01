@@ -119,6 +119,7 @@ export default function Home() {
                 <div className="col-12 col-md d-flex justify-content-center align-content-center my-5 my-md-0">
                     <div className="p-3 align-self-center">
                         <h1 style={{ fontSize: "2.5rem" }}> <b>SmAC</b> </h1>
+                        <p style={{ fontSize: "" }}> <i> - Stop paying ad agencies and start rewarding your audience instead. </i> </p>
                         <p style={{ fontSize: "1.2rem" }}> Incentive-driven solutions to help your business or project grow at the blockchain speed. Launch your smart ads in <span className="border-bottom">seconds</span>. </p>
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item "> <i className="fa fa-check-square-o text-success"></i> <b> No launch fees </b> </li>
