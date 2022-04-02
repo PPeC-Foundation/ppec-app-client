@@ -323,7 +323,7 @@ function W3llProtocol() {
                     <span style={{ fontSize: "4rem" }} role="img" aria-label="target"> &#127919; </span>
                     <h2 style={{ fontSize: "1.7rem" }} className="text-info"> <strong> Audiences Win </strong> </h2>
                     <p> <i> Finally, make your clicks work for you </i> </p>
-                    <p> Get rewarded for your participation and increase your token holdings from each claim. Claim rewards from Smart Ads that fit your interest(s). </p>
+                    <p> Get rewarded for your participation and increase your token holding from each claim. Claim rewards from Smart Ads that fit your interest(s). </p>
                 </div>
             </div>
 
@@ -369,7 +369,7 @@ function HowToUse() {
                 <div className="p-3 align-self-center text-center">
                     <span style={{ fontSize: "4rem" }} role="img" aria-label="diamond"> &#128142; </span>
                     <h2 style={{ fontSize: "1.7rem" }}> Claim </h2>
-                    <p> Claiming rewards, Increase holdings </p>
+                    <p> Claiming rewards, Increase holding </p>
                     {/* Link */}
                     <a
                         href="/ads"
