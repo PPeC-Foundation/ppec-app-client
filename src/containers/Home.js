@@ -305,7 +305,7 @@ function W3llProtocol() {
             <div className="col-12 d-flex justify-content-center align-content-center my-3 my-md-0">
                 <div className="p-3 align-self-center text-center">
                     <h1 style={{ fontSize: "2.5rem" }}> <b> W3LL Protocol </b> </h1>
-                    <p> When Advertisement is governed by the community, every participant is a winner </p>
+                    <p> When Advertising is governed by the community, every participant is a winner </p>
                 </div>
             </div>
 
