@@ -332,7 +332,7 @@ function W3llProtocol() {
                     <span style={{ fontSize: "4rem" }} role="img" aria-label="globe"> &#127757; </span>
                     <h2 style={{ fontSize: "1.7rem" }} className="text-info"> <strong> Community wins </strong> </h2>
                     <p> <i> A token that keeps on rising </i> </p>
-                    <p> Every PPeC tokens holder is part of the community including promoters and their audience. As the treasury balance increases, so does token burnings. </p>
+                    <p> Every PPeC tokens holder is part of the community including promoters and their audience. As the treasury balance increases, so does token burning. </p>
                 </div>
             </div>
 
