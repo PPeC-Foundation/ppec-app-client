@@ -358,7 +358,7 @@ function HowToUse() {
                 <div className="p-3 align-self-center text-center">
                     <span style={{ fontSize: "4rem" }} role="img" aria-label="bank"> &#127974; </span>
                     <h2 style={{ fontSize: "1.7rem" }}> Hold </h2>
-                    <p> Get PPeC with USDC</p>
+                    <p> Swap USDC for $PPeC</p>
                     <a href={buyPPeCLink} target="_blank" className="btn btn-primary border border-dark shadow-sm" rel="noopener noreferrer">
                         <i className='fa fa-bitcoin'></i>
                         <b> Get|PPeC </b>
