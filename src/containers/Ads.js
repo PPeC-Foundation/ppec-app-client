@@ -83,12 +83,12 @@ export default function Ads() {
                         }
 
                         // Important variables
-                        let now = new Date();
-                        let timeNow = now.getTime();
+                        //let now = new Date(); // running
+                        //let timeNow = now.getTime(); // running
                         let notClaimed = (object.hasClaimed === false); // Check that the current account has not claimed.
                         let notPromoter = (object.isPromoter === false); // Check that the current account is not the promoter.
                         let hasEnoughReward = (Number(object.reward) <= Number(object.coffer)); // Check that there is enough reward to be claimed.
-                        let hasNotExpired = ((object.expired * 1000) > timeNow); // Check that the ad is running.
+                        //let hasNotExpired = ((object.expired * 1000) > timeNow); // Check that the ad is running. // running
 
                         // Fitler for ads that are running, and have funds.
                         //if (hasEnoughReward && notPromoter && notClaimed && hasNotExpired) { // running
