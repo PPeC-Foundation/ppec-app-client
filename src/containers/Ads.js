@@ -91,7 +91,8 @@ export default function Ads() {
                         let hasNotExpired = ((object.expired * 1000) > timeNow); // Check that the ad is running.
 
                         // Fitler for ads that are running, and have funds.
-                        if (hasEnoughReward && notPromoter && notClaimed && hasNotExpired) {
+                        //if (hasEnoughReward && notPromoter && notClaimed && hasNotExpired) { // running
+                        if (hasEnoughReward && notPromoter && notClaimed) { // pre-launch
                             ads.push(object);
                         }
                     };
